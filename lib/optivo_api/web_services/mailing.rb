@@ -47,6 +47,6 @@ module OptivoApi::WebServices
       else
         raise OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result}"
       end
-   end
+    end
   end
 end
