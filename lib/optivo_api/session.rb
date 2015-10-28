@@ -5,7 +5,7 @@ module OptivoApi
     def login
       fetch_session_id.tap do |sid|
         OptivoApi.log "fetched session_id: #{sid}"
-         @session_id = sid
+        @session_id = sid
       end
     end
 
@@ -26,7 +26,7 @@ module OptivoApi
     end
 
     def credentials_missing?
-      credentials[:mandator_id].blank? || credentials[:user].blank?  || credentials[:password].blank?
+      credentials[:mandator_id].blank? || credentials[:user].blank? || credentials[:password].blank?
     end
 
     def credentials

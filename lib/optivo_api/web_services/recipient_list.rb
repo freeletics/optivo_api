@@ -9,7 +9,7 @@ module OptivoApi::WebServices
       fetch_value :get_all_ids
     end
 
-    def attribute_names(list_id,locale: :de)
+    def attribute_names(list_id, locale: :de)
       fetch_value(:get_attribute_names, recipientListId: list_id, locale: locale)[:get_attribute_names_return]
     end
 

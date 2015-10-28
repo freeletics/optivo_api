@@ -3,7 +3,7 @@ module OptivoApi
     attr_accessor :attributes, :call_name, :webservice_name
 
     def initialize(params = {})
-      @call_name  = params[:call_name]
+      @call_name = params[:call_name]
       @webservice_name = params[:webservice]
       @attributes = params[:attributes] || {}
       @auth       = params.fetch(:auth, true)

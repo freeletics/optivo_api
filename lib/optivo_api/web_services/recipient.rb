@@ -43,9 +43,9 @@ module OptivoApi::WebServices
       when 0, 5
         true
       when 1
-        fail OptivoApi::InvalidEmail, "#{error_message(result.to_i)} ErrorCode: #{result.to_i}"
+        raise OptivoApi::InvalidEmail, "#{error_message(result.to_i)} ErrorCode: #{result.to_i}"
       else
-        fail OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result.to_i}"
+        raise OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result.to_i}"
       end
    end
   end

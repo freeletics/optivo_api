@@ -1,7 +1,7 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'optivo_api/version'
+require "optivo_api/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "optivo_api"
@@ -9,11 +9,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Michael Deimel"]
   spec.email         = ["michael.deimel@freeletics.com"]
 
-  spec.summary       = %q{A wrapper for Optivo SOAP API}
-  spec.description   = %q{A wrapper for Optivo SOAP API}
+  spec.summary       = "A wrapper for Optivo SOAP API"
+  spec.description   = "A wrapper for Optivo SOAP API"
   spec.homepage      = "https://github.com/freeletics/optivo_api"
   spec.license       = "MIT"
-
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"

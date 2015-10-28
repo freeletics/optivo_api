@@ -25,25 +25,25 @@ module OptivoApi
     def message
       request.attributes.tap do |result|
         if request.auth?
-          result['sessionId'] = fetch_session_id
+          result["sessionId"] = fetch_session_id
           OptivoApi.log("use sessionId: #{result['sessionId']} for #{request.call_name}")
         end
       end
     end
 
     def fetch_session_id(force:false)
-      if has_cache?
+      if cache?
         fetch_cached(force: force)
       else
         session.login
-     end
+      end
     end
 
     def fetch_cached(force:)
-      cache.fetch 'optivo_api_session_id', expires_in: 10.minutes, force: force do
+      cache.fetch "optivo_api_session_id", expires_in: 10.minutes, force: force do
         session.login
       end
-   end
+    end
 
     def session
       @session ||= OptivoApi::Session.new
@@ -66,19 +66,18 @@ module OptivoApi
 
     def error_present?(raw_response)
       raw_response.body.keys[0] == :fault
-     end
+    end
 
     def raise_optivo_error(raw_response)
-      error_code = raw_response.body[:fault][:faultcode]
       error_message = raw_response.body[:fault][:faultstring]
       case error_message
       when /Invalid sessionId/
         # OptivoApi::Error: optivo.core.util.DontLogMeException: broadmail.api.soap11.impl.InvalidWebserviceSessionException: Invalid sessionId: 1
-        fail OptivoApi::InvalidSession, error_message
+        raise OptivoApi::InvalidSession, error_message
       when /Invalid credentials/
-        fail OptivoApi::AuthenticationError, error_message
+        raise OptivoApi::AuthenticationError, error_message
       else
-        fail OptivoApi::UnknownError, error_message
+        raise OptivoApi::UnknownError, error_message
       end
     end
 
@@ -99,7 +98,7 @@ module OptivoApi
       end
     end
 
-    def has_cache?
+    def cache?
       cache.respond_to? :fetch
     end
 

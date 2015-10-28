@@ -1,24 +1,20 @@
 class BlackHoleStore
-  def logger
-    Rails.logger
-  end
-
-  def fetch( *args )
+  def fetch(*args)
     yield
   end
 
-  def read( *args )
+  def read(*args)
   end
 
-  def write( *args )
+  def write(*args)
   end
 
-  def delete( *args )
+  def delete(*args)
   end
 
-  def increment( *args )
+  def increment(*args)
   end
 
-  def decrement( *args )
+  def decrement(*args)
   end
 end

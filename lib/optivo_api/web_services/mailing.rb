@@ -29,12 +29,12 @@ module OptivoApi::WebServices
 
     def error_message(code)
       {
-        1 => 'Recipient is blocked.',
-        2 => 'Recipient is on the unscriped-list.',
-        3 => 'Recipient was not found.',
-        4 => 'Invalid list.',
-        5 => 'Recipient does not fit into the targeting criteria.',
-        6 => 'Recipient has created too many bounces.'
+        1 => "Recipient is blocked.",
+        2 => "Recipient is on the unscriped-list.",
+        3 => "Recipient was not found.",
+        4 => "Invalid list.",
+        5 => "Recipient does not fit into the targeting criteria.",
+        6 => "Recipient has created too many bounces."
       }[code]
     end
 
@@ -43,9 +43,9 @@ module OptivoApi::WebServices
       when 0
         true
       when 3
-        fail OptivoApi::RecipientNotFound, 'Recipient was not found. ErrorCode: 3'
+        raise OptivoApi::RecipientNotFound, "Recipient was not found. ErrorCode: 3"
       else
-        fail OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result}"
+        raise OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result}"
       end
    end
   end
