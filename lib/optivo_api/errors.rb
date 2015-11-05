@@ -6,4 +6,5 @@ module OptivoApi
   class InvalidEmail < Error; end
   class RecipientNotFound < Error; end
   class CredentialsMissing < Error; end
+  class RecipientNotInList < Error; end
 end

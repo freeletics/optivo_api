@@ -26,19 +26,35 @@ RSpec.describe OptivoApi::WebServices::Recipient do
         expect(receipient.remove(list_id: "108713280263", email: "tester1@test.com")).to be_success
       end
     end
+
+    it "not existing user raises an exception" do
+      VCR.use_cassette("recipient_remove_not_exits") do
+        expect do
+          expect(receipient.remove(list_id: "108713280263", email: "superhero@test.com")).to be_success
+        end.to raise_error(OptivoApi::RecipientNotInList)
+      end
+    end
   end
 
   describe '#add' do
     it "gets valid value" do
       VCR.use_cassette("recipient_add") do
-        expect(receipient.add(list_id: "108713280263", email: "tester1@test.com", attribute_names: ["last_name"], attribute_values: ["tester1"])).to be_truthy
+        expect(receipient.add(
+                 list_id: "108713280263",
+                 email: "tester1@test.com",
+                 attribute_names: ["last_name"],
+                 attribute_values: ["tester1"])).to be_truthy
       end
     end
 
-    it "invalide email raises a exception" do
+    it "invalide email raises an exception" do
       VCR.use_cassette("recipient_add_invalid_email") do
         expect do
-          expect(receipient.add(list_id: "108713280263", email: "invalid", attribute_names: ["last_name"], attribute_values: ["tester1"]))
+          expect(receipient.add(
+                   list_id: "108713280263",
+                   email: "invalid",
+                   attribute_names: ["last_name"],
+                   attribute_values: ["tester1"]))
         end.to raise_error(OptivoApi::InvalidEmail)
       end
     end

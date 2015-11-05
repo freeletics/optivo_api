@@ -6,12 +6,29 @@ module OptivoApi::WebServices
       response = fetch_value(:get_all, recipientListId: list_id,
                                        attributeNames: [attribute_names])
       build_result_array attribute_names, response[:get_all_return].map { |res| res[:get_all_return] }
-   end
+    end
 
     # https://companion.broadmail.de/display/DEMANUAL/remove+-+RecipientWebservice
     def remove(list_id:, email:)
       fetch(:remove, recipientListId: list_id,
                      recipientId: email)
+    rescue => e
+      if e.message =~ /Recipient does not exist for call/i
+        raise OptivoApi::RecipientNotInList, e.message
+      else
+        raise
+      end
+    end
+
+    # first removes the user if exits
+    # then add it to the list
+    def force_add(list_id:, email:, attribute_names:, attribute_values:)
+      begin
+        remove(list_id: list_id, email: email)
+      rescue
+        OptivoApi::RecipientNotInList
+      end
+      add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/add2+-+RecipientWebservice
