@@ -5,6 +5,7 @@ module OptivoApi
       :user,
       :password,
       :logger,
+      :log_level,
       :cache
     ]
 
