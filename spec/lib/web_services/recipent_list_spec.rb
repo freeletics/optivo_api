@@ -10,10 +10,10 @@ RSpec.describe OptivoApi::WebServices::RecipientList do
     end
   end
 
-  describe '#all_ids' do
+  describe '#ids' do
     it "gets valid value" do
       VCR.use_cassette("recipient_list_all_ids") do
-        expect(list.all_ids).to eq(%w(108713280294 108713280297 108713280263 108713280303 108713280264))
+        expect(list.ids).to eq(%w(108713280294 108713280297 108713280263 108713280303 108713280264))
       end
     end
   end

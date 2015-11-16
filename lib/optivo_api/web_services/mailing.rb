@@ -3,7 +3,7 @@ module OptivoApi::WebServices
   class Mailing < Base
     def ids(mailing_type: :event)
       # mailingType (regular, event, confirmation)
-      fetch_value(:get_ids, mailingType: mailing_type)
+      Array(fetch_value(:get_ids, mailingType: mailing_type))
     end
 
     def name(mailing_id)

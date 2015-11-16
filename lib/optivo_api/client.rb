@@ -92,7 +92,7 @@ module OptivoApi
         savon.pretty_print_xml true
         savon.logger OptivoApi.config[:logger]
         savon.log true if OptivoApi.config[:logger]
-        savon.log_level OptivoApi.config.fetch(:log_level, :info) if OptivoApi.config[:logger]
+        savon.log_level (OptivoApi.config[:log_level].presence || :info) if OptivoApi.config[:logger]
         savon.open_timeout 180 # seconds
         savon.read_timeout 180 # seconds
       end
