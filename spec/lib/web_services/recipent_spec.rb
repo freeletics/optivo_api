@@ -47,7 +47,31 @@ RSpec.describe OptivoApi::WebServices::Recipient do
       end
     end
 
-    it "invalide email raises an exception" do
+    it "blacklisted email raises an exception" do
+      expect do
+        allow(receipient).to receive(:fetch_value).and_return(3)
+        receipient.add(
+          list_id: "108713280263",
+          email: "member@blacklisted.com",
+          attribute_names: ["last_name"],
+          attribute_values: ["tester1"])
+      end.to raise_error(OptivoApi::RecipientIsOnTheBlacklist,
+        /Receiver is on the blacklist. ErrorCode: 3 email: member@blacklisted.com/)
+    end
+
+    it "bounced email raises an exception" do
+      expect do
+        allow(receipient).to receive(:fetch_value).and_return(4)
+        receipient.add(
+          list_id: "108713280263",
+          email: "member@bounced.com",
+          attribute_names: ["last_name"],
+          attribute_values: ["tester1"])
+      end.to raise_error(OptivoApi::RecipientExceededBounceLimit,
+        /Receiver has exceeded the Bounce-Limit. ErrorCode: 4 email: member@bounced.com/)
+    end
+
+    it "invalid email raises an exception" do
       VCR.use_cassette("recipient_add_invalid_email") do
         expect do
           expect(receipient.add(
@@ -55,7 +79,8 @@ RSpec.describe OptivoApi::WebServices::Recipient do
                    email: "invalid",
                    attribute_names: ["last_name"],
                    attribute_values: ["tester1"]))
-        end.to raise_error(OptivoApi::InvalidEmail)
+        end.to raise_error(OptivoApi::InvalidEmail,
+          /Invalid email-address ErrorCode: 1 email: invalid/)
       end
     end
   end

@@ -10,6 +10,7 @@ module OptivoApi::WebServices
 
     # https://companion.broadmail.de/display/DEMANUAL/remove+-+RecipientWebservice
     def remove(list_id:, email:)
+      @email = email
       fetch(:remove, recipientListId: list_id,
                      recipientId: email)
     rescue => e
@@ -24,6 +25,7 @@ module OptivoApi::WebServices
     # then add it to the list
     def force_add(list_id:, email:, attribute_names:, attribute_values:)
       begin
+        @email = email
         remove(list_id: list_id, email: email)
       rescue
         OptivoApi::RecipientNotInList
@@ -33,6 +35,7 @@ module OptivoApi::WebServices
 
     # https://companion.broadmail.de/display/DEMANUAL/add2+-+RecipientWebservice
     def add(list_id:, email:, attribute_names:, attribute_values:)
+      @email = email
       parse_result fetch_value(:add2, recipientListId: list_id,
                                       optinProcessId: 0,
                                       recipientId: email,
@@ -42,6 +45,8 @@ module OptivoApi::WebServices
     end
 
     private
+
+    attr_reader :email
 
     def error_message(code)
       {
@@ -56,13 +61,18 @@ module OptivoApi::WebServices
     end
 
     def parse_result(result)
+      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i} email: #{email}"
       case result.to_i
       when 0, 5
         true
       when 1
-        raise OptivoApi::InvalidEmail, "#{error_message(result.to_i)} ErrorCode: #{result.to_i}"
+        raise OptivoApi::InvalidEmail, default_msg
+      when 3
+        raise OptivoApi::RecipientIsOnTheBlacklist, default_msg
+      when 4
+        raise OptivoApi::RecipientExceededBounceLimit, default_msg
       else
-        raise OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result.to_i}"
+        raise OptivoApi::Error, default_msg
       end
     end
   end

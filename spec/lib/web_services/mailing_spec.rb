@@ -30,14 +30,21 @@ RSpec.describe OptivoApi::WebServices::Mailing do
   describe '#send_mail' do
     it "gets valid value" do
       VCR.use_cassette("mailing_send_mail") do
-        expect(mailing.send_mail(list_id: 108_713_280_263, mailing_id: 112_769_986_317, email: "tester1@test.com")).to be_truthy
+        expect(mailing
+          .send_mail(
+            list_id: 108_713_280_263,
+            mailing_id: 112_769_986_317,
+            email: "tester1@test.com")).to be_truthy
       end
     end
 
     it "raises an error with invalid email" do
       VCR.use_cassette("mailing_send_wrong_mail") do
         expect do
-          mailing.send_mail(list_id: 108_713_280_263, mailing_id: 112_769_986_317, email: "some_where@overtherainbow.com")
+          mailing.send_mail(
+            list_id: 108_713_280_263,
+            mailing_id: 112_769_986_317,
+            email: "some_where@overtherainbow.com")
         end.to raise_error OptivoApi::RecipientNotFound
       end
     end

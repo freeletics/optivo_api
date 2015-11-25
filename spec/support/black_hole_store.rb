@@ -1,20 +1,20 @@
 class BlackHoleStore
-  def fetch(*args)
+  def fetch(*_args)
     yield
   end
 
-  def read(*args)
+  def read(*_args)
   end
 
-  def write(*args)
+  def write(*_args)
   end
 
-  def delete(*args)
+  def delete(*_args)
   end
 
-  def increment(*args)
+  def increment(*_args)
   end
 
-  def decrement(*args)
+  def decrement(*_args)
   end
 end

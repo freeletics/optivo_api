@@ -3,14 +3,14 @@ require "spec_helper"
 RSpec.describe OptivoApi::Request do
   let(:request) { OptivoApi::Request.new call_name: "get_all", webservice: "Receipient", attributes: {a: "b"} }
 
-  describe '#auth?' do
+  describe '#auth' do
     it "true by defautl" do
-      expect(request).to be_auth
+      expect(request.auth).to be_truthy
     end
 
     it "false when set" do
       request = OptivoApi::Request.new call_name: "get_all", webservice: "Receipient", auth: false
-      expect(request).not_to be_auth
+      expect(request.auth).to be_falsy
     end
   end
 
