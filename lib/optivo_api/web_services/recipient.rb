@@ -61,17 +61,21 @@ module OptivoApi::WebServices
     end
 
     def parse_result(result)
-      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i} email: #{email}"
+      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i}. email: #{email}"
       case result.to_i
       when 0, 5
         true
       when 1
+        OptivoApi.log(default_msg)
         raise OptivoApi::InvalidEmail, default_msg
       when 3
+        OptivoApi.log(default_msg)
         raise OptivoApi::RecipientIsOnTheBlacklist, default_msg
       when 4
+        OptivoApi.log(default_msg)
         raise OptivoApi::RecipientExceededBounceLimit, default_msg
       else
+        OptivoApi.log(default_msg)
         raise OptivoApi::Error, default_msg
       end
     end

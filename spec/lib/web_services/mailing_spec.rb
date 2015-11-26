@@ -53,7 +53,7 @@ RSpec.describe OptivoApi::WebServices::Mailing do
       VCR.use_cassette("mailing_send_wrong_list_id") do
         expect do
           mailing.send_mail(list_id: 666, mailing_id: 112_769_986_317, email: "tester1@test.com")
-        end.to raise_error "Invalid list. ErrorCode: 4"
+        end.to raise_error(/Invalid list. ErrorCode: 4. email: tester1@test.com/)
       end
     end
   end

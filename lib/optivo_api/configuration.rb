@@ -16,7 +16,14 @@ module OptivoApi::Configuration
 
   def config
     VALID_OPTIONS_KEYS.inject({}) do |option, key|
-      option.merge!(key => send(key))
+      value = send(key) || defaults[key]
+      option.merge!(key => value)
     end
+  end
+
+  private
+
+  def defaults
+    {log_level: :info}
   end
 end

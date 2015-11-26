@@ -16,7 +16,7 @@ module OptivoApi
       if OptivoApi.config[:logger].respond_to?(:tagged)
         OptivoApi.config[:logger].tagged("OPTIVO") { OptivoApi.config[:logger].info(msg) }
       else
-        OptivoApi.config[:logger].info(msg)
+        OptivoApi.config[:logger].send(OptivoApi.config[:log_level], msg)
       end
     end
   end

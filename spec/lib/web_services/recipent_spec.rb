@@ -56,7 +56,7 @@ RSpec.describe OptivoApi::WebServices::Recipient do
           attribute_names: ["last_name"],
           attribute_values: ["tester1"])
       end.to raise_error(OptivoApi::RecipientIsOnTheBlacklist,
-        /Receiver is on the blacklist. ErrorCode: 3 email: member@blacklisted.com/)
+        /Receiver is on the blacklist. ErrorCode: 3. email: member@blacklisted.com/)
     end
 
     it "bounced email raises an exception" do
@@ -68,7 +68,7 @@ RSpec.describe OptivoApi::WebServices::Recipient do
           attribute_names: ["last_name"],
           attribute_values: ["tester1"])
       end.to raise_error(OptivoApi::RecipientExceededBounceLimit,
-        /Receiver has exceeded the Bounce-Limit. ErrorCode: 4 email: member@bounced.com/)
+        /Receiver has exceeded the Bounce-Limit. ErrorCode: 4. email: member@bounced.com/)
     end
 
     it "invalid email raises an exception" do
@@ -80,7 +80,7 @@ RSpec.describe OptivoApi::WebServices::Recipient do
                    attribute_names: ["last_name"],
                    attribute_values: ["tester1"]))
         end.to raise_error(OptivoApi::InvalidEmail,
-          /Invalid email-address ErrorCode: 1 email: invalid/)
+          /Invalid email-address ErrorCode: 1. email: invalid/)
       end
     end
   end

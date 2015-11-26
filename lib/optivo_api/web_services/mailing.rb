@@ -13,6 +13,7 @@ module OptivoApi::WebServices
     # https://companion.broadmail.de/display/DEMANUAL/sendMail+-+MailingWebservice
     # recipient_email is the id of the recipient
     def send_mail(list_id:, mailing_id:, email:)
+      @email = email
       parse_result fetch_value(:send_mail, mailingId: mailing_id, recipientListId: list_id, recipientId: email)
     end
 
@@ -27,6 +28,8 @@ module OptivoApi::WebServices
 
     private
 
+    attr_reader :email
+
     def error_message(code)
       {
         1 => "Recipient is blocked.",
@@ -39,13 +42,16 @@ module OptivoApi::WebServices
     end
 
     def parse_result(result)
+      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result}. email: #{email}"
       case result.to_i
       when 0
         true
       when 3
-        raise OptivoApi::RecipientNotFound, "Recipient was not found. ErrorCode: 3"
+        OptivoApi.log(default_msg)
+        raise OptivoApi::RecipientNotFound, default_msg
       else
-        raise OptivoApi::Error, "#{error_message(result.to_i)} ErrorCode: #{result}"
+        OptivoApi.log(default_msg)
+        raise OptivoApi::Error, default_msg
       end
     end
   end

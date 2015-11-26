@@ -80,7 +80,7 @@ class OptivoApi::Client
   end
 
   def savon_client(wdsl)
-    log_level = OptivoApi.config[:log_level].presence || :info
+    log_level = OptivoApi.config[:log_level]
     Savon::Client.new do |savon|
       savon.ssl_verify_mode :none
       savon.wsdl wdsl
