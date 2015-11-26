@@ -84,4 +84,41 @@ RSpec.describe OptivoApi::WebServices::Recipient do
       end
     end
   end
+
+  describe '#force_add' do
+    it "gets valid value" do
+      VCR.use_cassette("recipient_add") do
+        expect(receipient).to receive(:remove).with(list_id: "108713280263", email: "tester1@test.com")
+        expect(receipient.force_add(
+                 list_id: "108713280263",
+                 email: "tester1@test.com",
+                 attribute_names: ["last_name"],
+                 attribute_values: ["tester1"])).to be_truthy
+      end
+    end
+
+    it "ignores not in the list exception" do
+      VCR.use_cassette("recipient_add") do
+        allow(receipient).to receive(:remove).and_raise OptivoApi::RecipientNotInList
+
+        expect(receipient.force_add(
+                 list_id: "108713280263",
+                 email: "tester1@test.com",
+                 attribute_names: ["last_name"],
+                 attribute_values: ["tester1"])).to be_truthy
+      end
+    end
+
+    it "ignores no other exception" do
+      expect do
+        allow(receipient).to receive(:remove).and_raise "too much information"
+
+        receipient.force_add(
+          list_id: "108713280263",
+          email: "tester1@test.com",
+          attribute_names: ["last_name"],
+          attribute_values: ["tester1"])
+      end.to raise_error("too much information")
+    end
+  end
 end

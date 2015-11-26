@@ -24,11 +24,9 @@ module OptivoApi::WebServices
     # first removes the user if exits
     # then add it to the list
     def force_add(list_id:, email:, attribute_names:, attribute_values:)
-      begin
+      suppress(OptivoApi::RecipientNotInList) do
         @email = email
         remove(list_id: list_id, email: email)
-      rescue
-        OptivoApi::RecipientNotInList
       end
       add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
