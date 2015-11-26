@@ -1,12 +1,6 @@
 require "savon"
 require "active_support/all"
-require "optivo_api/request"
-
-require File.join(File.dirname(__FILE__), "optivo_api", "web_services", "base.rb")
-
-Dir.glob(File.join(File.join(File.dirname(__FILE__)), "optivo_api", "**/*.rb")).each do |f|
-  require f
-end
+require "optivo_api/configuration"
 
 module OptivoApi
   extend Configuration
@@ -20,4 +14,10 @@ module OptivoApi
       end
     end
   end
+end
+
+require File.join(File.dirname(__FILE__), "optivo_api", "web_services", "base.rb")
+
+Dir.glob(File.join(File.join(File.dirname(__FILE__)), "optivo_api", "**/*.rb")).each do |f|
+  require f
 end

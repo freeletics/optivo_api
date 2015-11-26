@@ -1,4 +1,4 @@
-module OptivoApi::Configuration
+module Configuration
   VALID_OPTIONS_KEYS = [
     :mandator_id,
     :user,
