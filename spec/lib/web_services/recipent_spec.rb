@@ -6,15 +6,11 @@ RSpec.describe OptivoApi::WebServices::Recipient do
   describe '#all' do
     it "gets valid value" do
       VCR.use_cassette("recipient_get_all") do
-        expect(receipient.all("108713280263", :email, :last_name)).to eq(
-          [{email: "amelie@blah.com", last_name: nil},
-           {email: "blah@blah.com", last_name: "blah"},
-           {email: "michael@blah.de", last_name: "tester"},
-           {email: "nina@blah.com", last_name: nil},
-           {email: "steffi@blah.com", last_name: nil},
-           {email: "test@blah.de", last_name: nil},
-           {email: "test@blah2.de", last_name: "tester"},
-           {email: "tester1@test.com", last_name: nil}]
+        expect(receipient.all("108713280263", :email, :last_name)).to include(
+          {email: "nina+01@freeletics.com", last_name: "Test"},
+          {email: "nina+02@freeletics.com", last_name: "Muster"},
+          {email: "nina+03@freeletics.com", last_name: "Suppe"},
+          email: "nina+04@freeletics.com", last_name: "Tänzer"
         )
       end
     end

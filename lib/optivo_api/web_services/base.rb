@@ -14,10 +14,19 @@ module OptivoApi::WebServices
 
     private
 
-    def build_result_array(keys, values)
-      values.map do |v|
-        Array(v).map! { |val| (val.is_a?(Hash) && val.key?(:"@xsi:type")) ? nil : val }
-        Hash[Array(keys).zip(Array(v))]
+    def convert_values(values)
+      values.map { |val| (val.is_a?(Hash) && val.key?(:"@xsi:type")) ? "" : val }
+    end
+
+    def result_to_hash(values, keys)
+      [].tap do |result|
+        values.each_slice(keys.size) do |slice|
+          result << {}.tap do |hsh|
+            (0..(keys.size - 1)).each do |i|
+              hsh[keys[i]] = slice[i]
+            end
+          end
+        end
       end
     end
   end

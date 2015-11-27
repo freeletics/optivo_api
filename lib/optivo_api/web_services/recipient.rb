@@ -3,9 +3,10 @@ module OptivoApi::WebServices
   class Recipient < Base
     # https://companion.broadmail.de/display/DEMANUAL/getAllFlat+-+RecipientWebservice
     def all(list_id, *attribute_names)
-      response = fetch_value(:get_all, recipientListId: list_id,
-                                       attributeNames: [attribute_names])
-      build_result_array attribute_names, response[:get_all_return].map { |res| res[:get_all_return] }
+      response = fetch_value(:get_all_flat, recipientListId: list_id,
+                                            attributeNames: [attribute_names])
+
+      result_to_hash convert_values(response[:get_all_flat_return]), attribute_names
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/remove+-+RecipientWebservice
