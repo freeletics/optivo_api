@@ -117,4 +117,50 @@ RSpec.describe OptivoApi::WebServices::Recipient do
       end.to raise_error("too much information")
     end
   end
+
+  describe "#update" do
+    it "a user" do
+      VCR.use_cassette("update_an_existing_user") do
+        expect(receipient.update(
+                 list_id: "108713280263",
+                 email: "tester1@test.com",
+                 attribute_names: ["last_name"],
+                 attribute_values: ["tester123"]))
+      end
+    end
+
+    it "a none existing user" do
+      VCR.use_cassette("update_a_none_existing_user") do
+        expect do
+          receipient.update(
+            list_id: "108713280263",
+            email: "Unknown@test.com",
+            attribute_names: ["last_name"],
+            attribute_values: ["tester123"])
+        end.to raise_error(OptivoApi::RecipientNotInList)
+      end
+    end
+  end
+
+  describe "#update_or_insert" do
+    it "update an existing user" do
+      VCR.use_cassette("update_or_insert_an_existing_user") do
+        expect(receipient.update_or_insert(
+                 list_id: "108713280263",
+                 email: "tester1@test.com",
+                 attribute_names: ["last_name"],
+                 attribute_values: ["tester_name1"]))
+      end
+    end
+
+    it "a none existing user" do
+      VCR.use_cassette("update_or_insert_a_none_existing_user") do
+        receipient.update_or_insert(
+          list_id: "108713280263",
+          email: "Unknown@test.com",
+          attribute_names: ["last_name"],
+          attribute_values: ["Unknown"])
+      end
+    end
+  end
 end

@@ -12,13 +12,9 @@ module OptivoApi::WebServices
     # https://companion.broadmail.de/display/DEMANUAL/remove+-+RecipientWebservice
     def remove(list_id:, email:)
       @email = email
-      fetch(:remove, recipientListId: list_id,
-                     recipientId: email)
-    rescue => e
-      if e.message =~ /Recipient does not exist for call/i
-        raise OptivoApi::RecipientNotInList, e.message
-      else
-        raise
+      rescue_recipient_not_in_list do
+        fetch(:remove, recipientListId: list_id,
+                       recipientId: email)
       end
     end
 
@@ -43,9 +39,43 @@ module OptivoApi::WebServices
                                       attributeValues: [attribute_values])
     end
 
+    # https://companion.broadmail.de/display/DEMANUAL/setAttributes+-+RecipientWebservice
+    def update(list_id:, email:, attribute_names:, attribute_values:)
+      rescue_recipient_not_in_list do
+        parse_result fetch_value(:set_attributes,
+          recipientListId: list_id,
+          recipientId: email,
+          attributeNames:  [attribute_names],
+          attributeValues: [attribute_values])
+      end
+    end
+
+    # updates an existing user or insert a new one if not exits
+    def update_or_insert(list_id:, email:, attribute_names:, attribute_values:)
+      suppress(OptivoApi::RecipientNotInList) do
+        @email = email
+        add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      end
+      update(
+        list_id: list_id,
+        email: email,
+        attribute_names: attribute_names,
+        attribute_values: attribute_values)
+    end
+
     private
 
     attr_reader :email
+
+    def rescue_recipient_not_in_list
+      yield
+    rescue => e
+      if e.message =~ /Recipient does not exist[s]? for call/i
+        raise OptivoApi::RecipientNotInList, e.message
+      else
+        raise
+      end
+    end
 
     def error_message(code)
       {

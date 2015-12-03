@@ -5,7 +5,8 @@ module Configuration
     :password,
     :logger,
     :log_level,
-    :cache
+    :cache,
+    :disabled
   ]
 
   attr_accessor(*VALID_OPTIONS_KEYS)
@@ -24,6 +25,6 @@ module Configuration
   private
 
   def defaults
-    {log_level: :info}
+    {log_level: :info, disabled: false}
   end
 end

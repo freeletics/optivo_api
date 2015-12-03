@@ -13,10 +13,18 @@ class OptivoApi::Client
     OptivoApi::Response.build raw_response: soap_response, request: request
   end
 
+  def enabled?
+    @enabled ||= !OptivoApi.config[:disabled]
+  end
+
   def soap_response
     retry_on_invalid_session do
-      savon_client(request.optivo_url).call(request.call_name, message: message).tap do |raw|
-        raise_optivo_error(raw) if error_present?(raw)
+      if enabled?
+        savon_client(request.optivo_url).call(request.call_name, message: message).tap do |raw|
+          raise_optivo_error(raw) if error_present?(raw)
+        end
+      else
+        {}
       end
     end
   end
@@ -39,7 +47,7 @@ class OptivoApi::Client
   end
 
   def fetch_cached(force:)
-    cache.fetch "optivo_api_session_id", expires_in: 10.minutes, force: force do
+    cache.fetch cache_key, expires_in: 10.minutes, force: force do
       session.login
     end
   end
@@ -103,5 +111,9 @@ class OptivoApi::Client
 
   def cache
     OptivoApi.config[:cache]
+  end
+
+  def cache_key
+    @cache_key ||= "optivo_api_session_id_#{OptivoApi.config[:mandator_id].to_s.strip}"
   end
 end

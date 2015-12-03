@@ -10,8 +10,15 @@ RSpec.describe OptivoApi::Client do
     before { allow(OptivoApi::Session).to receive(:new).and_return session }
 
     it "calls the savon_client" do
-      allow(savon_client).to receive(:call).with("get_all",
+      expect(savon_client).to receive(:call).with("get_all",
         message: {:a => "b", "sessionId" => 123}).and_return(savon_client)
+      OptivoApi::Client.new.call request
+    end
+
+    it "don't calls the savon_client when disabled" do
+      allow(OptivoApi).to receive(:config).and_return(disabled: true)
+      expect(savon_client).to_not receive(:call).with("get_all",
+        message: {:a => "b", "sessionId" => 123})
       OptivoApi::Client.new.call request
     end
 
@@ -37,7 +44,7 @@ RSpec.describe OptivoApi::Client do
     end
 
     it "fetches the session_id from the cache" do
-      expect(cache).to receive(:fetch).with("optivo_api_session_id",
+      expect(cache).to receive(:fetch).with("optivo_api_session_id_666",
         expires_in: 10.minutes, force: false).and_return 666
       expect(client.send(:fetch_session_id)).to eq(666)
     end
