@@ -11,5 +11,5 @@
 ### Bugfixes
 - safe response parsing for disabled calls
 
-[0.7.0]: https://github.com/freeletics/optivo_ap/compare/v0.6.0...v0.7.0
-[0.7.1]: https://github.com/freeletics/optivo_ap/compare/v0.7.0...v0.7.1
+[0.7.0]: https://github.com/freeletics/optivo_api/compare/v0.6.0...v0.7.0
+[0.7.1]: https://github.com/freeletics/optivo_api/compare/v0.7.0...v0.7.1
