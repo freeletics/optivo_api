@@ -27,6 +27,7 @@ Or install it yourself as:
       config.password = "secret"
       config.logger = Rails.logger
       config.cache =  Rails.cache
+      config.disabled = !Rails.env.production?
     end
 
 ## Usage Examples
@@ -38,6 +39,7 @@ After configuring the `OptivoApi`, you can do the following things.
 recipient_list = OptivoApi::WebServices::RecipientList.new
 recipient_list.all
 ```
+
 **add a user to a recipient-list**
 
 ```ruby
@@ -48,12 +50,47 @@ recipient_service.add(
       attribute_names:  [:first_name, :last_name],
       attribute_values: ["Max", "Mad"]
 ```
+
+**add a user to a recipient-list if already exists remove them first**
+
+```ruby
+receipient = OptivoApi::WebServices::Recipient.new
+recipient_service.force_add(
+      list_id: 1234,
+      email: "my–email@test.com",
+      attribute_names:  [:first_name, :last_name],
+      attribute_values: ["Max", "Mad"]
+```
+
+**update an existing user**
+
+```ruby
+receipient = OptivoApi::WebServices::Recipient.new
+recipient_service.update(
+      list_id: 1234,
+      email: "my–email@test.com",
+      attribute_names:  [:first_name, :last_name],
+      attribute_values: ["Herman", "Madman"]
+```
+
+**update an existing user or add it to the list if not exists**
+
+```ruby
+receipient = OptivoApi::WebServices::Recipient.new
+recipient_service.update_or_insert(
+      list_id: 1234,
+      email: "my–email@test.com",
+      attribute_names:  [:first_name, :last_name],
+      attribute_values: ["Herman", "Madman"]
+```
+
 **remove a user from a list**
 
 ```ruby
 receipient = OptivoApi::WebServices::Recipient.new
 receipient.remove(list_id: 1234, email: "my–email@test.com")
 ```
+
 
 **send a mail to a user**
 
