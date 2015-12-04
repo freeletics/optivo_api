@@ -5,11 +5,14 @@ module OptivoApi::WebServices
     end
 
     def fetch(call_name, attributes = {})
-      OptivoApi::Request.fetch!(webservice: webservice, call_name: call_name, attributes: attributes)
+      OptivoApi::Request.fetch!(
+        webservice: webservice,
+        call_name: call_name,
+        attributes: attributes)
     end
 
     def fetch_value(call_name, attributes = {})
-      fetch(call_name, attributes).value
+      fetch(call_name, attributes).try(:value)
     end
 
     private

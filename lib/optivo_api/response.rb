@@ -8,14 +8,15 @@ class OptivoApi::Response
   def initialize(raw_response:, request:)
     @raw_response = raw_response
     @request      = request
-    @document     = raw_response.to_hash
+    @document     = raw_response.try(:to_hash) || {}
   end
 
   def value
     if document.key? :multi_ref
       document[:multi_ref]
     else
-      document["#{@request.call_name}_response".to_sym]["#{@request.call_name}_return".to_sym]
+      document.fetch("#{@request.call_name}_response".to_sym, {})
+        .fetch("#{@request.call_name}_return".to_sym, "")
     end
   end
 
