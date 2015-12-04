@@ -52,15 +52,13 @@ module OptivoApi::WebServices
 
     # updates an existing user or insert a new one if not exits
     def update_or_insert(list_id:, email:, attribute_names:, attribute_values:)
-      suppress(OptivoApi::RecipientNotInList) do
-        @email = email
-        add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
-      end
       update(
         list_id: list_id,
         email: email,
         attribute_names: attribute_names,
         attribute_values: attribute_values)
+    rescue OptivoApi::RecipientNotInList
+      add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
 
     private

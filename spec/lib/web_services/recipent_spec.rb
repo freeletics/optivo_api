@@ -83,8 +83,8 @@ RSpec.describe OptivoApi::WebServices::Recipient do
 
   describe '#force_add' do
     it "gets valid value" do
+      expect(receipient).to receive(:remove).with(list_id: "108713280263", email: "tester1@test.com")
       VCR.use_cassette("recipient_add") do
-        expect(receipient).to receive(:remove).with(list_id: "108713280263", email: "tester1@test.com")
         expect(receipient.force_add(
                  list_id: "108713280263",
                  email: "tester1@test.com",
@@ -151,6 +151,20 @@ RSpec.describe OptivoApi::WebServices::Recipient do
                  attribute_names: ["last_name"],
                  attribute_values: ["tester_name1"]))
       end
+    end
+
+    it "add an user if not exists" do
+      allow(receipient).to receive(:update).and_raise OptivoApi::RecipientNotInList
+      expect(receipient).to receive(:add).with(
+        list_id: "108713280263",
+        email: "tester1@test.com",
+        attribute_names: ["last_name"],
+        attribute_values: ["tester_name1"])
+      expect(receipient.update_or_insert(
+               list_id: "108713280263",
+               email: "tester1@test.com",
+               attribute_names: ["last_name"],
+               attribute_values: ["tester_name1"]))
     end
 
     it "a none existing user" do
