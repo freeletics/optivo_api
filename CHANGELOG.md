@@ -8,4 +8,4 @@
 - uniq cache key
 
 
-[0.7.0]: https://github.com/freeletics/optivo_ap/compare/v0.6.0...v0.7.0
+[0.7.0]: https://github.com/freeletics/optivo_api/compare/v0.6.0...v0.7.0
