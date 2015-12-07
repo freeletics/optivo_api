@@ -21,10 +21,10 @@ module OptivoApi::WebServices
     # first removes the user if exits
     # then add it to the list
     def force_add(list_id:, email:, attribute_names:, attribute_values:)
-      suppress(OptivoApi::RecipientNotInList) do
-        @email = email
-        remove(list_id: list_id, email: email)
-      end
+      @email = email
+      add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+    rescue OptivoApi::RecipientIsAlreadyOnThisList
+      remove(list_id: list_id, email: email)
       add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
 
@@ -66,7 +66,9 @@ module OptivoApi::WebServices
     attr_reader :email
 
     def rescue_recipient_not_in_list
-      yield
+      suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
+        yield
+      end
     rescue => e
       if e.message =~ /Recipient does not exist[s]? for call/i
         raise OptivoApi::RecipientNotInList, e.message
@@ -90,7 +92,7 @@ module OptivoApi::WebServices
     def parse_result(result)
       default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i}. email: #{email}"
       case result.to_i
-      when 0, 5
+      when 0
         true
       when 1
         OptivoApi.log(default_msg)
@@ -101,6 +103,9 @@ module OptivoApi::WebServices
       when 4
         OptivoApi.log(default_msg)
         raise OptivoApi::RecipientExceededBounceLimit, default_msg
+      when 5
+        OptivoApi.log(default_msg)
+        raise OptivoApi::RecipientIsAlreadyOnThisList, default_msg
       else
         OptivoApi.log(default_msg)
         raise OptivoApi::Error, default_msg

@@ -83,8 +83,7 @@ RSpec.describe OptivoApi::WebServices::Recipient do
 
   describe '#force_add' do
     it "gets valid value" do
-      expect(receipient).to receive(:remove).with(list_id: "108713280263", email: "tester1@test.com")
-      VCR.use_cassette("recipient_add") do
+      VCR.use_cassette("force_add") do
         expect(receipient.force_add(
                  list_id: "108713280263",
                  email: "tester1@test.com",
@@ -93,21 +92,32 @@ RSpec.describe OptivoApi::WebServices::Recipient do
       end
     end
 
-    it "ignores not in the list exception" do
-      VCR.use_cassette("recipient_add") do
-        allow(receipient).to receive(:remove).and_raise OptivoApi::RecipientNotInList
+    it "calls the valid methods in the right order" do
+      expect(receipient).to receive(:add).with(
+        list_id: "108713280263",
+        email: "tester1@test.com",
+        attribute_names: ["last_name"],
+        attribute_values: ["tester1"]).and_raise OptivoApi::RecipientIsAlreadyOnThisList
+      expect(receipient).to receive(:remove).with(list_id: "108713280263", email: "tester1@test.com").ordered
 
-        expect(receipient.force_add(
-                 list_id: "108713280263",
-                 email: "tester1@test.com",
-                 attribute_names: ["last_name"],
-                 attribute_values: ["tester1"])).to be_truthy
+      expect(receipient).to receive(:add).with(
+        list_id: "108713280263",
+        email: "tester1@test.com",
+        attribute_names: ["last_name"],
+        attribute_values: ["tester1"]).ordered
+
+      VCR.use_cassette("recipient_add") do
+        receipient.force_add(
+          list_id: "108713280263",
+          email: "tester1@test.com",
+          attribute_names: ["last_name"],
+          attribute_values: ["tester1"])
       end
     end
 
     it "ignores no other exception" do
       expect do
-        allow(receipient).to receive(:remove).and_raise "too much information"
+        allow(receipient).to receive(:add).and_raise "too much information"
 
         receipient.force_add(
           list_id: "108713280263",
