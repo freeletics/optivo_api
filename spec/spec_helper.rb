@@ -44,7 +44,7 @@ end
 VCR.configure do |c|
   c.cassette_library_dir = File.expand_path("../fixtures/cassettes", __FILE__)
   c.hook_into :webmock
-   c.debug_logger = STDOUT
+  c.default_cassette_options = {record: :new_episodes}
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:mandator_id] }
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:user] }
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:password] }
