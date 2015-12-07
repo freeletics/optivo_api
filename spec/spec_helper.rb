@@ -42,7 +42,7 @@ OptivoApi.configure do |config|
 end
 
 VCR.configure do |c|
-  c.cassette_library_dir = "spec/fixtures/cassettes"
+  c.cassette_library_dir = File.expand_path("../fixtures/cassettes", __FILE__)
   c.hook_into :webmock
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:mandator_id] }
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:user] }
