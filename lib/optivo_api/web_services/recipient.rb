@@ -18,6 +18,14 @@ module OptivoApi::WebServices
       end
     end
 
+    # suppress the exception when user not exits
+    def force_remove(list_id:, email:)
+      @email = email
+      suppress(OptivoApi::RecipientNotInList) do
+        remove(list_id: list_id, email: email)
+      end
+    end
+
     # first removes the user if exits
     # then add it to the list
     def force_add(list_id:, email:, attribute_names:, attribute_values:)
@@ -58,7 +66,9 @@ module OptivoApi::WebServices
         attribute_names: attribute_names,
         attribute_values: attribute_values)
     rescue OptivoApi::RecipientNotInList
-      add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
+        add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      end
     end
 
     private

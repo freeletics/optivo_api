@@ -24,8 +24,15 @@
 - new exception RecipientIsAlreadyOnThisList
 - reduce api calls in method OptivoApi::WebServices#force_add
 
+## [0.7.5] - 2015-12-8
+### Bugfixes
+- ignore RecipientIsAlreadyOnThisList for update_or_insert
+### new methode
+- force_remove it ignores RecipientNotInList
+
 [0.7.0]: https://github.com/freeletics/optivo_api/compare/v0.6.0...v0.7.0
 [0.7.1]: https://github.com/freeletics/optivo_api/compare/v0.7.0...v0.7.1
 [0.7.2]: https://github.com/freeletics/optivo_api/compare/v0.7.1...v0.7.2
 [0.7.3]: https://github.com/freeletics/optivo_api/compare/v0.7.2...v0.7.3
 [0.7.4]: https://github.com/freeletics/optivo_api/compare/v0.7.3...v0.7.4
+[0.7.4]: https://github.com/freeletics/optivo_api/compare/v0.7.4...v0.7.5

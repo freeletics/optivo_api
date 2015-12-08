@@ -32,6 +32,22 @@ RSpec.describe OptivoApi::WebServices::Recipient do
     end
   end
 
+  describe '#force_remove' do
+    it "gets valid value" do
+      VCR.use_cassette("recipient_remove") do
+        expect(receipient.force_remove(list_id: "108713280263", email: "tester1@test.com")).to be_success
+      end
+    end
+
+    it "not existing user raises an exception" do
+      VCR.use_cassette("recipient_remove_not_exits") do
+        expect do
+          expect(receipient.force_remove(list_id: "108713280263", email: "superhero@test.com"))
+        end.to_not raise_error
+      end
+    end
+  end
+
   describe '#add' do
     it "gets valid value" do
       VCR.use_cassette("recipient_add") do
