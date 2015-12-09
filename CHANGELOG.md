@@ -40,4 +40,4 @@
 [0.7.3]: https://github.com/freeletics/optivo_api/compare/v0.7.2...v0.7.3
 [0.7.4]: https://github.com/freeletics/optivo_api/compare/v0.7.3...v0.7.4
 [0.7.5]: https://github.com/freeletics/optivo_api/compare/v0.7.4...v0.7.5
-[0.7.5]: https://github.com/freeletics/optivo_api/compare/v0.7.5...v0.7.6
+[0.7.6]: https://github.com/freeletics/optivo_api/compare/v0.7.5...v0.7.6
