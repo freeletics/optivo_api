@@ -33,7 +33,7 @@ module OptivoApi::WebServices
       add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     rescue OptivoApi::RecipientIsAlreadyOnThisList
       remove(list_id: list_id, email: email)
-      add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      safe_add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/add2+-+RecipientWebservice
@@ -66,14 +66,18 @@ module OptivoApi::WebServices
         attribute_names: attribute_names,
         attribute_values: attribute_values)
     rescue OptivoApi::RecipientNotInList
-      suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
-        add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
-      end
+      safe_add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
 
     private
 
     attr_reader :email
+
+    def safe_add(list_id:, email:, attribute_names:, attribute_values:)
+      suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
+        add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      end
+    end
 
     def rescue_recipient_not_in_list
       suppress(OptivoApi::RecipientIsAlreadyOnThisList) do

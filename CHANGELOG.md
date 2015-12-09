@@ -27,8 +27,12 @@
 ## [0.7.5] - 2015-12-8
 ### Bugfixes
 - ignore RecipientIsAlreadyOnThisList for update_or_insert
-### new methode
+### Added
 - force_remove it ignores RecipientNotInList
+
+## [0.7.6] - 2015-12-8
+### Added
+- add safe_add for not failing when user is already on the list
 
 [0.7.0]: https://github.com/freeletics/optivo_api/compare/v0.6.0...v0.7.0
 [0.7.1]: https://github.com/freeletics/optivo_api/compare/v0.7.0...v0.7.1
@@ -36,3 +40,4 @@
 [0.7.3]: https://github.com/freeletics/optivo_api/compare/v0.7.2...v0.7.3
 [0.7.4]: https://github.com/freeletics/optivo_api/compare/v0.7.3...v0.7.4
 [0.7.5]: https://github.com/freeletics/optivo_api/compare/v0.7.4...v0.7.5
+[0.7.5]: https://github.com/freeletics/optivo_api/compare/v0.7.5...v0.7.6
