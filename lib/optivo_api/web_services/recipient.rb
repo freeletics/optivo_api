@@ -31,10 +31,18 @@ module OptivoApi::WebServices
     def force_add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
       @recipient_id = recipient_id
       @email = email
-      add(list_id: list_id, recipient_id: recipient_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      add(list_id: list_id,
+          recipient_id: recipient_id,
+          email: email,
+          attribute_names: attribute_names,
+          attribute_values: attribute_values)
     rescue OptivoApi::RecipientIsAlreadyOnThisList
       remove(list_id: list_id, recipient_id: recipient_id)
-      safe_add(list_id: list_id, recipient_id: recipient_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      safe_add(list_id: list_id,
+               recipient_id: recipient_id,
+               email: email,
+               attribute_names: attribute_names,
+               attribute_values: attribute_values)
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/add2+-+RecipientWebservice
@@ -70,11 +78,11 @@ module OptivoApi::WebServices
         attribute_values: attribute_values)
     rescue OptivoApi::RecipientNotInList
       safe_add(
-       list_id: list_id,
-       recipient_id: recipient_id,
-       email: email,
-       attribute_names: attribute_names,
-       attribute_values: attribute_values)
+        list_id: list_id,
+        recipient_id: recipient_id,
+        email: email,
+        attribute_names: attribute_names,
+        attribute_values: attribute_values)
     end
 
     private
@@ -83,8 +91,11 @@ module OptivoApi::WebServices
 
     def safe_add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
       suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
-        add(list_id: list_id, recipient_id: recipient_id, email: email,
-          attribute_names: attribute_names, attribute_values: attribute_values)
+        add(list_id: list_id,
+            recipient_id: recipient_id,
+            email: email,
+            attribute_names: attribute_names,
+            attribute_values: attribute_values)
       end
     end
 
@@ -113,7 +124,8 @@ module OptivoApi::WebServices
     end
 
     def parse_result(result)
-      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i} recipient_id: #{recipient_id} #{'email: ' + email if email}"
+      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i} "\
+        "recipient_id: #{recipient_id} #{'email: ' + email if email}"
       case result.to_i
       when 0
         true

@@ -34,7 +34,7 @@ RSpec.describe OptivoApi::WebServices::Mailing do
           .send_mail(
             list_id: 108_713_280_263,
             mailing_id: 112_769_986_317,
-            email: "tester1@test.com")).to be_truthy
+            recipient_id: 1)).to be_truthy
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe OptivoApi::WebServices::Mailing do
           mailing.send_mail(
             list_id: 108_713_280_263,
             mailing_id: 112_769_986_317,
-            email: "some_where@overtherainbow.com")
+            recipient_id: 123_456_789)
         end.to raise_error OptivoApi::RecipientNotFound
       end
     end
@@ -52,8 +52,8 @@ RSpec.describe OptivoApi::WebServices::Mailing do
     it "raises an error with invalid list" do
       VCR.use_cassette("mailing_send_wrong_list_id") do
         expect do
-          mailing.send_mail(list_id: 666, mailing_id: 112_769_986_317, email: "tester1@test.com")
-        end.to raise_error(/Invalid list. ErrorCode: 4. email: tester1@test.com/)
+          mailing.send_mail(list_id: 666, mailing_id: 112_769_986_317, recipient_id: 1)
+        end.to raise_error(/Invalid list. ErrorCode: 4. recipient_id: 1/)
       end
     end
   end

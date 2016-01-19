@@ -11,10 +11,9 @@ module OptivoApi::WebServices
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/sendMail+-+MailingWebservice
-    # recipient_email is the id of the recipient
-    def send_mail(list_id:, mailing_id:, email:)
-      @email = email
-      parse_result fetch_value(:send_mail, mailingId: mailing_id, recipientListId: list_id, recipientId: email)
+    def send_mail(list_id:, mailing_id:, recipient_id:)
+      @recipient_id = recipient_id
+      parse_result fetch_value(:send_mail, mailingId: mailing_id, recipientListId: list_id, recipientId: recipient_id)
     end
 
     # Returns a hash with list_id => list_name
@@ -28,7 +27,7 @@ module OptivoApi::WebServices
 
     private
 
-    attr_reader :email
+    attr_reader :recipient_id
 
     def error_message(code)
       {
@@ -42,7 +41,7 @@ module OptivoApi::WebServices
     end
 
     def parse_result(result)
-      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result}. email: #{email}"
+      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result}. recipient_id: #{recipient_id}"
       case result.to_i
       when 0
         true

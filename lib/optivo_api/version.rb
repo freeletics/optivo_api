@@ -1,3 +1,3 @@
 module OptivoApi
-  VERSION = "0.7.6"
+  VERSION = "0.8.8"
 end
