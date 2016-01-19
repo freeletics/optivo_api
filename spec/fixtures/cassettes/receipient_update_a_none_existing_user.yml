@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 19 Jan 2016 08:42:57 GMT
+      - Tue, 19 Jan 2016 14:35:50 GMT
       Server:
       - Apache
       P3p:
@@ -695,7 +695,7 @@ http_interactions:
 
         </wsdl:definitions>
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 08:42:57 GMT
+  recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: post
     uri: https://api.broadmail.de/soap11/RpcSession
@@ -723,7 +723,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 19 Jan 2016 08:42:57 GMT
+      - Tue, 19 Jan 2016 14:35:50 GMT
       Server:
       - Apache
       P3p:
@@ -738,9 +738,9 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:loginResponse
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcSession"><loginReturn
-        xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">d4f9384a6c11054a</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
+        xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">3f00eebea08ea272</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 08:42:58 GMT
+  recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: get
     uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL=true
@@ -760,7 +760,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 19 Jan 2016 08:42:58 GMT
+      - Tue, 19 Jan 2016 14:35:50 GMT
       Server:
       - Apache
       P3p:
@@ -4590,7 +4590,7 @@ http_interactions:
 
         </wsdl:definitions>
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 08:42:58 GMT
+  recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: post
     uri: https://api.broadmail.de/soap11/RpcRecipient
@@ -4598,14 +4598,14 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:impl="urn:api.broadmail.de/soap11/RpcRecipient"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><impl:remove><recipientListId>120199092218</recipientListId><recipientId>2</recipientId><sessionId>d4f9384a6c11054a</sessionId></impl:remove></env:Body></env:Envelope>
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><impl:setAttributes><recipientListId>120199092218</recipientListId><recipientId>12345</recipientId><attributeNames><element>last_name</element></attributeNames><attributeValues><element>tester123</element></attributeValues><sessionId>3f00eebea08ea272</sessionId></impl:setAttributes></env:Body></env:Envelope>
     headers:
       Soapaction:
-      - '"remove"'
+      - '"setAttributes"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '436'
+      - '578'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -4614,25 +4614,120 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 200
-      message: OK
+      code: 500
+      message: Internal Server Error
     headers:
       Date:
-      - Tue, 19 Jan 2016 08:42:58 GMT
+      - Tue, 19 Jan 2016 14:35:50 GMT
       Server:
       - Apache
       P3p:
       - policyref="http://www.srv2.de/w3c/p3p.xml",CP="NOI DSP COR CURa ADMa DEVa
         OUR IND UNI COM NAV"
+      Connection:
+      - close
       Transfer-Encoding:
       - chunked
       Content-Type:
       - text/xml;charset=utf-8
     body:
       encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:removeResponse
-        soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcRecipient"/></soapenv:Body></soapenv:Envelope>
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><soapenv:Body><soapenv:Fault><faultcode>soapenv:Server.userException</faultcode><faultstring>broadmail.api.soap11.impl.WebserviceImplException:
+        [3f00eebea08ea272,<FILTERED>,<FILTERED>] Recipient does not exists for call:
+        recipientListId='120199092218', recipientId='12345', attributeNames='last_name',
+        attributeValues='tester123'</faultstring><detail><ns1:stackTrace xmlns:ns1=\"http://xml.apache.org/axis/\">broadmail.api.soap11.impl.WebserviceImplException:
+        [3f00eebea08ea272,<FILTERED>,<FILTERED>] Recipient does not exists for call:
+        recipientListId='120199092218', recipientId='12345', attributeNames='last_name',
+        attributeValues='tester123'\n\tat broadmail.api.soap11.impl.BaseSoap11Webservice.createWebserviceException(BaseSoap11Webservice.java:437)\n\tat
+        broadmail.api.soap11.impl.RecipientWebserviceImpl.setAttributes(RecipientWebserviceImpl.java:664)\n\tat
+        sun.reflect.GeneratedMethodAccessor169.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat
+        java.lang.reflect.Method.invoke(Method.java:497)\n\tat org.apache.axis.providers.java.RPCProvider.invokeMethod(RPCProvider.java:397)\n\tat
+        org.apache.axis.providers.java.RPCProvider.processMessage(RPCProvider.java:186)\n\tat
+        org.apache.axis.providers.java.JavaProvider.invoke(JavaProvider.java:323)\n\tat
+        org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)\n\tat
+        org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)\n\tat org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)\n\tat
+        org.apache.axis.handlers.soap.SOAPService.invoke(SOAPService.java:454)\n\tat
+        org.apache.axis.server.AxisServer.invoke(AxisServer.java:281)\n\tat org.apache.axis.transport.http.AxisServlet.doPost(AxisServlet.java:699)\n\tat
+        javax.servlet.http.HttpServlet.service(HttpServlet.java:648)\n\tat org.apache.axis.transport.http.AxisServletBase.service(AxisServletBase.java:327)\n\tat
+        javax.servlet.http.HttpServlet.service(HttpServlet.java:729)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:83)\n\tat
+        org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:76)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        optivo.core.misc.DefaultLocaleFilter.doFilter(DefaultLocaleFilter.java:37)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        optivo.core.misc.StaticResponseHeaderFilter.doFilter(StaticResponseHeaderFilter.java:63)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        optivo.core.log.log4j.ClearMdcServletFilter.doFilter(ClearMdcServletFilter.java:26)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        broadmail.core.management.BroadmailServletThreadWatchDogFilter.doFilter(BroadmailServletThreadWatchDogFilter.java:23)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        optivo.core.management.threads.ServletThreadWatchDogFilter.doFilter(ServletThreadWatchDogFilter.java:43)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        optivo.core.net.PathFilter.doFilter(PathFilter.java:159)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:369)\n\tat
+        pero.db.persistence.ThreadBoundTransaction$KillFilter.doFilter(ThreadBoundTransaction.java:97)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        broadmail.webui2.stripes.CheckUserAccessFilter.doFilter(CheckUserAccessFilter.java:25)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        optivo.core.misc.DebugFilter.doFilter(DebugFilter.java:26)\n\tat optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        broadmail.webui2.security.IntrusionPreventionFilter$1.run(IntrusionPreventionFilter.java:47)\n\tat
+        optivo.core.security.SecurityContext.runWithContext(SecurityContext.java:37)\n\tat
+        broadmail.webui2.security.IntrusionPreventionFilter.doFilter(IntrusionPreventionFilter.java:45)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        broadmail.webui2.stripes.SessionToIpBindingFilter.doFilter(SessionToIpBindingFilter.java:61)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        optivo.core.misc.CountRequestsFilter.doFilter(CountRequestsFilter.java:48)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        optivo.core.performance.AbstractResponseTimeMonitorFilter.doFilter(AbstractResponseTimeMonitorFilter.java:22)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        broadmail.core.performance.MeasureResponseTimesFilter.doFilter(MeasureResponseTimesFilter.java:42)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        broadmail.core.management.RejectHttpRequestsUntilServiceIsStartedFilter.doFilter(RejectHttpRequestsUntilServiceIsStartedFilter.java:62)\n\tat
+        optivo.core.spring.OrderedServletFilter.doFilter(OrderedServletFilter.java:31)\n\tat
+        org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:381)\n\tat
+        org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:168)\n\tat
+        org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:237)\n\tat
+        org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:167)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        optivo.core.misc.SetEncodingFilter.doFilter(SetEncodingFilter.java:25)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)\n\tat
+        org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)\n\tat
+        org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)\n\tat
+        org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)\n\tat
+        org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)\n\tat
+        org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)\n\tat
+        org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)\n\tat
+        org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)\n\tat
+        org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:518)\n\tat
+        org.apache.coyote.ajp.AbstractAjpProcessor.process(AbstractAjpProcessor.java:844)\n\tat
+        org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:668)\n\tat
+        org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1527)\n\tat
+        org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1484)\n\tat
+        java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat
+        java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat
+        org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat
+        java.lang.Thread.run(Thread.java:745)\n</ns1:stackTrace><ns2:hostname xmlns:ns2=\"http://xml.apache.org/axis/\">api-01.broadmail.live</ns2:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>"
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 08:42:58 GMT
+  recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 recorded_with: VCR 2.9.3

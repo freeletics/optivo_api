@@ -10,72 +10,81 @@ module OptivoApi::WebServices
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/remove+-+RecipientWebservice
-    def remove(list_id:, email:)
-      @email = email
+    def remove(list_id:, recipient_id:)
+      @recipient_id = recipient_id
       rescue_recipient_not_in_list do
         fetch(:remove, recipientListId: list_id,
-                       recipientId: email)
+                       recipientId: recipient_id)
       end
     end
 
     # suppress the exception when user not exits
-    def force_remove(list_id:, email:)
-      @email = email
+    def force_remove(list_id:, recipient_id:)
+      @recipient_id = recipient_id
       suppress(OptivoApi::RecipientNotInList) do
-        remove(list_id: list_id, email: email)
+        remove(list_id: list_id, recipient_id: recipient_id)
       end
     end
 
     # first removes the user if exits
     # then add it to the list
-    def force_add(list_id:, email:, attribute_names:, attribute_values:)
+    def force_add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
+      @recipient_id = recipient_id
       @email = email
-      add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      add(list_id: list_id, recipient_id: recipient_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     rescue OptivoApi::RecipientIsAlreadyOnThisList
-      remove(list_id: list_id, email: email)
-      safe_add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      remove(list_id: list_id, recipient_id: recipient_id)
+      safe_add(list_id: list_id, recipient_id: recipient_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/add2+-+RecipientWebservice
-    def add(list_id:, email:, attribute_names:, attribute_values:)
+    def add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
+      @recipient_id = recipient_id
       @email = email
       parse_result fetch_value(:add2, recipientListId: list_id,
                                       optinProcessId: 0,
-                                      recipientId: email,
+                                      recipientId: recipient_id,
                                       address: email,
                                       attributeNames:  [attribute_names],
                                       attributeValues: [attribute_values])
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/setAttributes+-+RecipientWebservice
-    def update(list_id:, email:, attribute_names:, attribute_values:)
+    def update(list_id:, recipient_id:, attribute_names:, attribute_values:)
+      @recipient_id = recipient_id
       rescue_recipient_not_in_list do
         parse_result fetch_value(:set_attributes,
           recipientListId: list_id,
-          recipientId: email,
+          recipientId: recipient_id,
           attributeNames:  [attribute_names],
           attributeValues: [attribute_values])
       end
     end
 
     # updates an existing user or insert a new one if not exits
-    def update_or_insert(list_id:, email:, attribute_names:, attribute_values:)
+    def update_or_insert(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
       update(
         list_id: list_id,
-        email: email,
+        recipient_id: recipient_id,
         attribute_names: attribute_names,
         attribute_values: attribute_values)
     rescue OptivoApi::RecipientNotInList
-      safe_add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+      safe_add(
+       list_id: list_id,
+       recipient_id: recipient_id,
+       email: email,
+       attribute_names: attribute_names,
+       attribute_values: attribute_values)
     end
 
     private
 
-    attr_reader :email
+    attr_reader :recipient_id, :email
 
-    def safe_add(list_id:, email:, attribute_names:, attribute_values:)
+    def safe_add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
       suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
-        add(list_id: list_id, email: email, attribute_names: attribute_names, attribute_values: attribute_values)
+        add(list_id: list_id, recipient_id: recipient_id, email: email,
+          attribute_names: attribute_names, attribute_values: attribute_values)
       end
     end
 
@@ -104,7 +113,7 @@ module OptivoApi::WebServices
     end
 
     def parse_result(result)
-      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i}. email: #{email}"
+      default_msg = "#{error_message(result.to_i)} ErrorCode: #{result.to_i} recipient_id: #{recipient_id} #{'email: ' + email if email}"
       case result.to_i
       when 0
         true
