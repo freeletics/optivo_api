@@ -15,7 +15,8 @@ class OptivoApi::Response
     if document.key? :multi_ref
       document[:multi_ref]
     else
-      document.fetch("#{@request.call_name}_response".to_sym, {})
+      document
+        .fetch("#{@request.call_name}_response".to_sym, {})
         .fetch("#{@request.call_name}_return".to_sym, "")
     end
   end

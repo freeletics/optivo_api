@@ -7,7 +7,7 @@ module Configuration
     :log_level,
     :cache,
     :disabled
-  ]
+  ].freeze
 
   attr_accessor(*VALID_OPTIONS_KEYS)
 
