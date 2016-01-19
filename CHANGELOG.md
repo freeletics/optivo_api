@@ -38,6 +38,10 @@
 ### Changed
 - chaged recipient identifier from email to recipient_id
 
+## [0.8.1 - 2016-01-19
+### Bugfixes
+- rubocop adjustments
+
 [0.7.0]: https://github.com/freeletics/optivo_api/compare/v0.6.0...v0.7.0
 [0.7.1]: https://github.com/freeletics/optivo_api/compare/v0.7.0...v0.7.1
 [0.7.2]: https://github.com/freeletics/optivo_api/compare/v0.7.1...v0.7.2
@@ -46,3 +50,4 @@
 [0.7.5]: https://github.com/freeletics/optivo_api/compare/v0.7.4...v0.7.5
 [0.7.6]: https://github.com/freeletics/optivo_api/compare/v0.7.5...v0.7.6
 [0.8.0]: https://github.com/freeletics/optivo_api/compare/v0.7.6...v0.8.0
+[0.8.1]: https://github.com/freeletics/optivo_api/compare/v0.8.0...v0.8.1
