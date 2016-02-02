@@ -8,6 +8,7 @@ module OptivoApi
   class CredentialsMissing < Error; end
   class RecipientNotInList < Error; end
   class RecipientIsAlreadyOnThisList < Error; end
+  class NoUnsubscribeFound < Error; end
   class RecipientExceededBounceLimit < Error; end
   class RecipientIsOnTheBlacklist < Error; end
 end
