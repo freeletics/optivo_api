@@ -216,4 +216,79 @@ RSpec.describe OptivoApi::WebServices::Recipient do
       end
     end
   end
+
+  describe "#get" do
+    it "gets valid value" do
+      VCR.use_cassette("recipient_get") do
+        expect(recipient.get(list_id: "120199092218", recipient_id: 1)
+          .except("Erstellt am", "Geändert am", "Opt-in-Datum")).to eq(
+            "Opt-in-Quelle" => "",
+            "application_source" => "running",
+            "birthday" => "",
+            "coach" => "",
+            "coach_active" => "",
+            "coach_cancelled_at" => "",
+            "coach_end_date" => "",
+            "coach_recurring" => "",
+            "coach_start_date" => "",
+            "coach_week" => "",
+            "coach_week_start_date" => "",
+            "confirmed_at_date" => "",
+            "email" => "b-nocoach@test.com",
+            "first_name" => "Freeletics",
+            "first_training_completed_at" => "",
+            "fl_uid" => "1",
+            "gender" => "m",
+            "gym_coach" => "",
+            "gym_coach_active" => "",
+            "gym_coach_end_date" => "",
+            "gym_coach_start_date" => "",
+            "gym_coach_week" => "",
+            "gym_coach_week_start_date" => "",
+            "hell_Days" => "",
+            "hellweek" => "",
+            "individual_voucher_code_1" => "",
+            "individual_voucher_code_2" => "",
+            "last_PB_at" => "",
+            "last_name" => "michael",
+            "last_training_at" => "",
+            "level" => "",
+            "level_changed_at" => "",
+            "locale" => "de",
+            "motivation_indicator" => "",
+            "nutrition" => "",
+            "nutrition_start_date" => "",
+            "onboarding_first_workout" => "",
+            "onboarding_fitness_level" => "",
+            "onboarding_workout_link" => "",
+            "ordered_in_the_shop" => "",
+            "pro_app" => "",
+            "product_bought_1" => "",
+            "product_bought_2" => "",
+            "recommended_product_1" => "",
+            "recommended_product_2" => "",
+            "recommended_product_3" => "",
+            "registration_country" => "",
+            "registration_source" => "",
+            "run_coach" => "",
+            "run_coach_active" => "",
+            "run_coach_end_date" => "",
+            "run_coach_start_date" => "",
+            "run_coach_week" => "",
+            "run_coach_week_start_date" => "",
+            "running_first_training_at" => "",
+            "running_last_training_at" => "",
+            "shop_voucher_code" => "",
+            "training_city" => "",
+            "training_count_last_14_days" => "",
+            "training_count_last_7_days" => "",
+            "trainings_count" => "",
+            "trainings_count_last_month" => "",
+            "unsubscribe_url" => "",
+            "user_avatar_url" => "",
+            "winBack_Voucher_code" => ""
+          )
+      end
+    end
+  end
 end

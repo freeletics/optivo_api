@@ -26,6 +26,26 @@ module OptivoApi::WebServices
       end
     end
 
+    # Returns a Hash with attribute => value of recipient
+    def get(list_id:, recipient_id:, attribute_names: [])
+      if attribute_names.blank?
+        attribute_names = RecipientList.new.attribute_names(list_id)
+      end
+
+      result = get_attributes(
+        list_id: list_id,
+        recipient_id: recipient_id,
+        attribute_names: attribute_names)
+
+      attribute_names.zip(result).to_h
+    end
+
+    # https://companion.broadmail.de/display/DEMANUAL/getAttributes+-+RecipientWebservice
+    def get_attributes(list_id:, recipient_id:, attribute_names:)
+      convert_values fetch_value(:get_attributes, recipient_list_id: list_id, recipient_id: recipient_id,
+                                                  attribute_names: [attribute_names])[:get_attributes_return]
+    end
+
     # first removes the user if exits
     # then add it to the list
     def force_add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
