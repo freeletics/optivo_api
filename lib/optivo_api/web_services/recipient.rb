@@ -31,13 +31,14 @@ module OptivoApi::WebServices
       if attribute_names.blank?
         attribute_names = RecipientList.new.attribute_names(list_id)
       end
+      rescue_recipient_not_in_list do
+        result = get_attributes(
+          list_id: list_id,
+          recipient_id: recipient_id,
+          attribute_names: attribute_names)
 
-      result = get_attributes(
-        list_id: list_id,
-        recipient_id: recipient_id,
-        attribute_names: attribute_names)
-
-      attribute_names.zip(result).to_h
+        attribute_names.zip(result).to_h
+      end
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/getAttributes+-+RecipientWebservice

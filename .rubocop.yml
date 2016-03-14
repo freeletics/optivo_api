@@ -16,7 +16,7 @@ Style/ExtraSpacing:
 Style/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
-Style/SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Enabled: false
 
 Style/SignalException:

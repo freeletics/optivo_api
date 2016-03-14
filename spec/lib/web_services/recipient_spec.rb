@@ -290,5 +290,12 @@ RSpec.describe OptivoApi::WebServices::Recipient do
           )
       end
     end
+    it "raises an excpetion when user not on the list" do
+      VCR.use_cassette("recipient_get_not_on_list") do
+        expect do
+          recipient.get(list_id: "120199092218", recipient_id: 999_999_999)
+        end.to raise_error(OptivoApi::RecipientNotInList)
+      end
+    end
   end
 end
