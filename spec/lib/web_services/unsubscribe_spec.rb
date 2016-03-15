@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe OptivoApi::WebServices::Unsubscribe, focus: true do
+RSpec.describe OptivoApi::WebServices::Unsubscribe do
   let(:unsubscribe) { OptivoApi::WebServices::Unsubscribe.new }
   describe '#add' do
     it "gets valid value" do

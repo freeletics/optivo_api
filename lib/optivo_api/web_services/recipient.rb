@@ -37,14 +37,18 @@ module OptivoApi::WebServices
           recipient_id: recipient_id,
           attribute_names: attribute_names)
 
+        return {} if attribute_names.blank?
+
         attribute_names.zip(result).to_h
       end
     end
 
     # https://companion.broadmail.de/display/DEMANUAL/getAttributes+-+RecipientWebservice
     def get_attributes(list_id:, recipient_id:, attribute_names:)
-      convert_values fetch_value(:get_attributes, recipient_list_id: list_id, recipient_id: recipient_id,
-                                                  attribute_names: [attribute_names])[:get_attributes_return]
+      convert_values fetch_value(:get_attributes,
+        recipient_list_id: list_id,
+        recipient_id: recipient_id,
+        attribute_names: [attribute_names]).try(:fetch, :get_attributes_return)
     end
 
     # first removes the user if exits
