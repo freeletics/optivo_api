@@ -8,11 +8,16 @@ module OptivoApi::WebServices
       OptivoApi::Request.fetch!(
         webservice: webservice,
         call_name: call_name,
-        attributes: attributes)
+        attributes: attributes,
+        config:     @config)
     end
 
     def fetch_value(call_name, attributes = {})
       fetch(call_name, attributes).try(:value)
+    end
+
+    def initialize(config = {})
+      @config = config
     end
 
     private

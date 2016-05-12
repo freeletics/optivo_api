@@ -1,6 +1,11 @@
 class OptivoApi::Session
   attr_reader :session_id
 
+  def initialize(config={})
+    @config = config
+  end
+
+
   def login
     fetch_session_id.tap do |sid|
       OptivoApi.log "fetched session_id: #{sid}"
@@ -16,6 +21,10 @@ class OptivoApi::Session
     end
   end
 
+  def cache_key
+    "optivo_api_session_id_#{config[:mandator_id].to_s.strip}"
+  end
+
   private
 
   def fetch_session_id
@@ -28,7 +37,11 @@ class OptivoApi::Session
     credentials[:mandator_id].blank? || credentials[:user].blank? || credentials[:password].blank?
   end
 
+  def config
+    OptivoApi.config.merge @config
+  end
+
   def credentials
-    @credentials ||= OptivoApi.config.slice(:mandator_id, :user, :password)
+    config.slice(:mandator_id, :user, :password)
   end
 end

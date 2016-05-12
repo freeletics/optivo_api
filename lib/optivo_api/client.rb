@@ -1,10 +1,14 @@
 class OptivoApi::Client
   attr_accessor :logger
-  attr_reader :request
+  attr_reader :request, :config
 
   def call(request)
     @request = request
     build_response
+  end
+
+  def initialize(config = {})
+    @config = config
   end
 
   private
@@ -53,7 +57,7 @@ class OptivoApi::Client
   end
 
   def session
-    @session ||= OptivoApi::Session.new
+    OptivoApi::Session.new(config)
   end
 
   def retry_on_invalid_session(&_block)
@@ -114,6 +118,6 @@ class OptivoApi::Client
   end
 
   def cache_key
-    @cache_key ||= "optivo_api_session_id_#{OptivoApi.config[:mandator_id].to_s.strip}"
+    session.cache_key
   end
 end

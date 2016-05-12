@@ -38,6 +38,25 @@ RSpec.describe OptivoApi::WebServices::Mailing do
       end
     end
 
+    it "sends mailing within different manadant" do
+      config =  {
+          mandator_id: "113691715311",
+          user: "system@test.com",
+          password: "123456"
+        }
+
+
+      mailing = OptivoApi::WebServices::Mailing.new(config)
+      VCR.use_cassette("mailing_send_mail_different_mandant") do
+        expect(mailing
+          .send_mail(
+            list_id: 128_808_720_030,
+            mailing_id: 118_835_160_305,
+            recipient_id: 7_215_144
+          )).to be_truthy
+      end
+    end
+
     it "raises an error with invalid email" do
       VCR.use_cassette("mailing_send_wrong_mail") do
         expect do
