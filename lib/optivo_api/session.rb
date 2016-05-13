@@ -1,10 +1,9 @@
 class OptivoApi::Session
   attr_reader :session_id
 
-  def initialize(config={})
+  def initialize(config = {})
     @config = config
   end
-
 
   def login
     fetch_session_id.tap do |sid|

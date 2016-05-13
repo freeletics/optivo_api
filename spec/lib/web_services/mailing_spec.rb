@@ -39,12 +39,11 @@ RSpec.describe OptivoApi::WebServices::Mailing do
     end
 
     it "sends mailing within different manadant" do
-      config =  {
-          mandator_id: "113691715311",
-          user: "system@test.com",
-          password: "123456"
-        }
-
+      config = {
+        mandator_id: "113691715311",
+        user: "system@test.com",
+        password: "123456"
+      }
 
       mailing = OptivoApi::WebServices::Mailing.new(config)
       VCR.use_cassette("mailing_send_mail_different_mandant") do
