@@ -42,7 +42,7 @@ class OptivoApi::Client
     end
   end
 
-  def fetch_session_id(force:false)
+  def fetch_session_id(force: false)
     if cache?
       fetch_cached(force: force)
     else

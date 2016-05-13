@@ -60,3 +60,6 @@ Lint/EndAlignment:
 
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
+
+Style/MultilineMethodCallBraceLayout:
+  Enabled: false
