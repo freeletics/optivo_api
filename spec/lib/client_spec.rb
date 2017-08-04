@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe OptivoApi::Client do
   let(:request) { OptivoApi::Request.new call_name: "get_all", webservice: "Receipient", attributes: {a: "b"} }
 
-  describe '#call' do
+  describe "#call" do
     let(:savon_client) { double(Savon::Client).as_null_object }
     let(:session) { double(OptivoApi::Session, login: 123).as_null_object }
     before { allow(Savon::Client).to receive(:new).and_return savon_client }

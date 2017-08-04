@@ -4,20 +4,12 @@ AllCops:
 Documentation:
   Enabled: false
 
+# Style
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
-
-Style/ExtraSpacing:
-  AllowForAlignment: true
-
-Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-
-Style/SpaceBeforeFirstArg:
-  Enabled: false
 
 Style/SignalException:
   EnforcedStyle: only_raise
@@ -25,15 +17,10 @@ Style/SignalException:
 Style/BlockDelimiters:
   Enabled: false
 
-Style/CaseIndentation:
-  Enabled: false
-
 Style/GuardClause:
   Enabled: false
 
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
-
+# Metrics
 Metrics/LineLength:
   Max: 120
 
@@ -55,11 +42,30 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Enabled: false
 
-Lint/EndAlignment:
-  AlignWith: variable
+Metrics/BlockLength:
+  Enabled: false
 
-Style/AlignParameters:
+# Layout
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
+Lint/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
-Style/MultilineMethodCallBraceLayout:
+Layout/MultilineMethodCallBraceLayout:
   Enabled: false
+
+Layout/CaseIndentation:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented

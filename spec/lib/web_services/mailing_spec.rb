@@ -3,15 +3,15 @@ require "spec_helper"
 RSpec.describe OptivoApi::WebServices::Mailing do
   let(:mailing) { OptivoApi::WebServices::Mailing.new }
 
-  describe '#ids' do
+  describe "#ids" do
     it "gets valid value" do
       VCR.use_cassette("mailing_ids") do
-        expect(mailing.ids).to eq(%w(112769986317 112770005572))
+        expect(mailing.ids).to eq(%w[112769986317 112770005572])
       end
     end
   end
 
-  describe '#name' do
+  describe "#name" do
     it "gets valid value" do
       VCR.use_cassette("mailing_name") do
         expect(mailing.name(112_770_005_572)).to eq("Test-Welcome-Mail")
@@ -19,7 +19,7 @@ RSpec.describe OptivoApi::WebServices::Mailing do
     end
   end
 
-  describe '#all' do
+  describe "#all" do
     it "gets valid value" do
       VCR.use_cassette("mailing_all") do
         expect(mailing.all).to eq("112769986317" => "Test-Welcome-Mail Michael", "112770005572" => "Test-Welcome-Mail")
@@ -27,7 +27,7 @@ RSpec.describe OptivoApi::WebServices::Mailing do
     end
   end
 
-  describe '#send_mail' do
+  describe "#send_mail" do
     it "gets valid value" do
       VCR.use_cassette("mailing_send_mail") do
         expect(mailing

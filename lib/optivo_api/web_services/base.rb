@@ -23,7 +23,7 @@ module OptivoApi::WebServices
     private
 
     def convert_values(values)
-      Array(values).map { |val| (val.is_a?(Hash) && val.key?(:"@xsi:type")) ? "" : val }
+      Array(values).map { |val| val.is_a?(Hash) && val.key?(:"@xsi:type") ? "" : val }
     end
 
     def result_to_hash(values, keys)

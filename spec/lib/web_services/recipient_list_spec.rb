@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe OptivoApi::WebServices::RecipientList do
   let(:list) { OptivoApi::WebServices::RecipientList.new }
-  describe '#count' do
+  describe "#count" do
     it "gets valid value" do
       VCR.use_cassette("recipient_list_count") do
         expect(list.count).to eq("4")
@@ -10,15 +10,15 @@ RSpec.describe OptivoApi::WebServices::RecipientList do
     end
   end
 
-  describe '#ids' do
+  describe "#ids" do
     it "gets valid value" do
       VCR.use_cassette("recipient_list_all_ids") do
-        expect(list.ids).to eq(%w(108713280294 108713280297 108713280263 108713280303 108713280264))
+        expect(list.ids).to eq(%w[108713280294 108713280297 108713280263 108713280303 108713280264])
       end
     end
   end
 
-  describe '#all' do
+  describe "#all" do
     it "gets valid value" do
       VCR.use_cassette("recipient_list_all") do
         expect(list.all).to eq(
@@ -32,7 +32,7 @@ RSpec.describe OptivoApi::WebServices::RecipientList do
     end
   end
 
-  describe '#attribute_names' do
+  describe "#attribute_names" do
     it "gets valid value" do
       VCR.use_cassette("recipient_list_attribute_names") do
         expect(list.attribute_names(108_713_280_297)).to eq(
@@ -56,7 +56,7 @@ RSpec.describe OptivoApi::WebServices::RecipientList do
     end
   end
 
-  describe '#name' do
+  describe "#name" do
     it "gets valid value" do
       VCR.use_cassette("recipient_list_name") do
         expect(list.name("108713280297")).to eq("welcome_mail")

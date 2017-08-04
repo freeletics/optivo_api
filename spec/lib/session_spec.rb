@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe OptivoApi::Session do
   let(:session) { OptivoApi::Session.new }
 
-  describe '#login' do
+  describe "#login" do
     it "return a session_id" do
       VCR.use_cassette("session_login") do
         result = session.login
@@ -21,7 +21,7 @@ RSpec.describe OptivoApi::Session do
     end
   end
 
-  describe '#logout' do
+  describe "#logout" do
     it "not raises an error" do
       VCR.use_cassette("session_logout") do
         session.login

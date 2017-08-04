@@ -97,7 +97,7 @@ class OptivoApi::Client
       savon.ssl_verify_mode :none
       savon.wsdl wdsl
       savon.raise_errors false
-      savon.filters [:mandatorId, :password]
+      savon.filters %i[mandatorId password]
       savon.convert_request_keys_to :lower_camelcase
       savon.strip_namespaces true
       savon.pretty_print_xml log_level == :debug

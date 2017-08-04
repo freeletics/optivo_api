@@ -1,13 +1,5 @@
 module Configuration
-  VALID_OPTIONS_KEYS = [
-    :mandator_id,
-    :user,
-    :password,
-    :logger,
-    :log_level,
-    :cache,
-    :disabled
-  ].freeze
+  VALID_OPTIONS_KEYS = %i[mandator_id user password logger log_level cache disabled].freeze
 
   attr_accessor(*VALID_OPTIONS_KEYS)
 
