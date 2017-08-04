@@ -6,7 +6,9 @@ RSpec.describe OptivoApi::Session do
   describe '#login' do
     it "return a session_id" do
       VCR.use_cassette("session_login") do
-        expect(session.login).to eq("33c4296db6972a38")
+        result = session.login
+        expect(result).to eq("33c4296db6972a38")
+        expect(result.class).to eq(String)
       end
     end
 

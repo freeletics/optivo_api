@@ -28,8 +28,8 @@ class OptivoApi::Session
 
   def fetch_session_id
     raise OptivoApi::CredentialsMissing, "Credentials are missing" if credentials_missing?
-    response = OptivoApi::Request.fetch! webservice:  "Session", call_name: :login, attributes: credentials, auth: false
-    response.value
+    response = OptivoApi::Request.fetch! webservice: "Session", call_name: :login, attributes: credentials, auth: false
+    response.value.to_s
   end
 
   def credentials_missing?
