@@ -100,7 +100,7 @@ class OptivoApi::Client
       savon.filters [:mandatorId, :password]
       savon.convert_request_keys_to :lower_camelcase
       savon.strip_namespaces true
-      savon.pretty_print_xml true
+      savon.pretty_print_xml log_level == :debug
       savon.logger OptivoApi.config[:logger]
       savon.log true if OptivoApi.config[:logger]
       savon.log_level log_level if OptivoApi.config[:logger]
