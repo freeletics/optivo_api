@@ -44,8 +44,11 @@ RSpec.describe OptivoApi::Client do
     end
 
     it "fetches the session_id from the cache" do
-      expect(cache).to receive(:fetch).with("optivo_api_session_id_666",
-        expires_in: 10.minutes, force: false).and_return 666
+      expect(cache).to receive(:fetch).with(
+        "optivo_api_session_id_666",
+        expires_in: 10 * 60, # 10 minutes
+        force: false
+      ).and_return 666
       expect(client.send(:fetch_session_id)).to eq(666)
     end
   end

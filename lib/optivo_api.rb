@@ -1,5 +1,4 @@
 require "savon"
-require "active_support/all"
 require "optivo_api/configuration"
 
 module OptivoApi

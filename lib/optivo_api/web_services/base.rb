@@ -1,7 +1,7 @@
 module OptivoApi::WebServices
   class Base
     def webservice
-      self.class.name.demodulize
+      self.class.name.split("::").last
     end
 
     def fetch(call_name, attributes = {})
@@ -13,7 +13,7 @@ module OptivoApi::WebServices
     end
 
     def fetch_value(call_name, attributes = {})
-      fetch(call_name, attributes).try(:value)
+      fetch(call_name, attributes)&.value
     end
 
     def initialize(config = {})

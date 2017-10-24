@@ -51,7 +51,7 @@ class OptivoApi::Client
   end
 
   def fetch_cached(force:)
-    cache.fetch cache_key, expires_in: 10.minutes, force: force do
+    cache.fetch cache_key, expires_in: 60 * 10, force: force do
       session.login
     end
   end
