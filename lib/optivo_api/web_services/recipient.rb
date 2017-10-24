@@ -128,7 +128,7 @@ module OptivoApi::WebServices
       suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
         yield
       end
-    rescue => e
+    rescue StandardError => e
       if e.message =~ /Recipient does not exist[s]? for call/i
         raise OptivoApi::RecipientNotInList, e.message
       else
