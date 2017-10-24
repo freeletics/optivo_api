@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "optivo_api"
   spec.version       = OptivoApi::VERSION
   spec.authors       = ["Michael Deimel"]
-  spec.email         = ["michael.deimel@freeletics.com"]
+  spec.email         = ["eng@freeletics.com"]
 
   spec.summary       = "A wrapper for Optivo SOAP API"
   spec.description   = "A wrapper for Optivo SOAP API"
