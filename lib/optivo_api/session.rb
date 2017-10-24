@@ -33,7 +33,7 @@ class OptivoApi::Session
   end
 
   def credentials_missing?
-    credentials[:mandator_id].blank? || credentials[:user].blank? || credentials[:password].blank?
+    credentials[:mandator_id].nil? || credentials[:user].nil? || credentials[:password].nil?
   end
 
   def config
@@ -41,6 +41,6 @@ class OptivoApi::Session
   end
 
   def credentials
-    config.slice(:mandator_id, :user, :password)
+    config.select { |key, _v| %i[mandator_id user password].include?(key) }
   end
 end

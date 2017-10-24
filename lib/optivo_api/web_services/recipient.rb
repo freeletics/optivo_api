@@ -21,9 +21,8 @@ module OptivoApi::WebServices
     # suppress the exception when user not exits
     def force_remove(list_id:, recipient_id:)
       @recipient_id = recipient_id
-      suppress(OptivoApi::RecipientNotInList) do
-        remove(list_id: list_id, recipient_id: recipient_id)
-      end
+      remove(list_id: list_id, recipient_id: recipient_id)
+    rescue OptivoApi::RecipientNotInList # rubocop:disable Lint/HandleExceptions
     end
 
     # Returns a Hash with attribute => value of recipient
@@ -48,7 +47,7 @@ module OptivoApi::WebServices
       convert_values fetch_value(:get_attributes,
         recipient_list_id: list_id,
         recipient_id: recipient_id,
-        attribute_names: [attribute_names]).try(:fetch, :get_attributes_return)
+        attribute_names: [attribute_names])&.fetch(:get_attributes_return)
     end
 
     # first removes the user if exits
@@ -115,20 +114,18 @@ module OptivoApi::WebServices
     attr_reader :recipient_id, :email
 
     def safe_add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
-      suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
-        add(list_id: list_id,
-            recipient_id: recipient_id,
-            email: email,
-            attribute_names: attribute_names,
-            attribute_values: attribute_values)
-      end
+      add(list_id: list_id,
+          recipient_id: recipient_id,
+          email: email,
+          attribute_names: attribute_names,
+          attribute_values: attribute_values)
+    rescue OptivoApi::RecipientIsAlreadyOnThisList # rubocop:disable Lint/HandleExceptions
     end
 
     def rescue_recipient_not_in_list
-      suppress(OptivoApi::RecipientIsAlreadyOnThisList) do
-        yield
-      end
-    rescue => e
+      yield
+    rescue OptivoApi::RecipientIsAlreadyOnThisList # rubocop:disable Lint/HandleExceptions
+    rescue StandardError => e
       if e.message =~ /Recipient does not exist[s]? for call/i
         raise OptivoApi::RecipientNotInList, e.message
       else

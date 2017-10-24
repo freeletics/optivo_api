@@ -220,8 +220,11 @@ RSpec.describe OptivoApi::WebServices::Recipient do
   describe "#get" do
     it "gets valid value" do
       VCR.use_cassette("recipient_get") do
-        expect(recipient.get(list_id: "120199092218", recipient_id: 1)
-          .except("Erstellt am", "Geändert am", "Opt-in-Datum")).to eq(
+        expect(recipient.get(list_id: "120199092218", recipient_id: 1))
+          .to eq(
+            "Erstellt am" => Time.parse("2016-02-02T09:36:31+01:00").to_datetime,
+            "Geändert am" => Time.parse("2016-02-02T09:36:31+01:00").to_datetime,
+            "Opt-in-Datum" => Time.parse("2016-02-02T09:36:31+01:00").to_datetime,
             "Opt-in-Quelle" => "",
             "application_source" => "running",
             "birthday" => "",

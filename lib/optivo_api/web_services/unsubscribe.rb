@@ -4,7 +4,7 @@ module OptivoApi::WebServices
     # https://companion.broadmail.de/display/DEMANUAL/remove+-+UnsubscribeWebservice
     def remove(recipient_id:)
       fetch_value(:remove, recipientId: recipient_id)
-    rescue => e
+    rescue StandardError => e
       if e.message =~ /No unsubscribe found/i
         raise OptivoApi::NoUnsubscribeFound, e.message
       else
