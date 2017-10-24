@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcSession?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcSession?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -694,7 +694,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: post
@@ -739,11 +739,11 @@ http_interactions:
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:loginResponse
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcSession"><loginReturn
         xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">9dbfc83bc88be1ab</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:51 GMT
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -4589,7 +4589,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:51 GMT
 - request:
     method: post
@@ -4635,11 +4635,11 @@ http_interactions:
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcRecipient"><add2Return
         href="#id0"/></ns1:add2Response><multiRef id="id0" soapenc:root="0" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
         xsi:type="xsd:int" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">5</multiRef></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:51 GMT
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcSession?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcSession?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -5331,7 +5331,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:51 GMT
 - request:
     method: post
@@ -5376,11 +5376,11 @@ http_interactions:
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:loginResponse
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcSession"><loginReturn
         xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">51dcc4f2f06b3c3e</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:51 GMT
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -9226,7 +9226,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:51 GMT
 - request:
     method: post
@@ -9270,11 +9270,11 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:removeResponse
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcRecipient"/></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:52 GMT
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcSession?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcSession?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -9966,7 +9966,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:52 GMT
 - request:
     method: post
@@ -10011,11 +10011,11 @@ http_interactions:
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:loginResponse
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcSession"><loginReturn
         xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">5c5b3d359d33e7e4</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:52 GMT
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -13861,7 +13861,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:52 GMT
 - request:
     method: post
@@ -13907,6 +13907,6 @@ http_interactions:
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcRecipient"><add2Return
         href="#id0"/></ns1:add2Response><multiRef id="id0" soapenc:root="0" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
         xsi:type="xsd:int" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">0</multiRef></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:52 GMT
 recorded_with: VCR 2.9.3

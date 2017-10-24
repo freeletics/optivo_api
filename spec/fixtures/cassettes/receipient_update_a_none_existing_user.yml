@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcSession?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcSession?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -694,7 +694,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: post
@@ -739,11 +739,11 @@ http_interactions:
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:loginResponse
         soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcSession"><loginReturn
         xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">3f00eebea08ea272</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: get
-    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL=true
+    uri: https://api.broadmail.de/soap11/RpcRecipient?WSDL
     body:
       encoding: US-ASCII
       string: ''
@@ -4589,7 +4589,7 @@ http_interactions:
 
 
         </wsdl:definitions>
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 - request:
     method: post
@@ -4728,6 +4728,6 @@ http_interactions:
         java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat
         org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat
         java.lang.Thread.run(Thread.java:745)\n</ns1:stackTrace><ns2:hostname xmlns:ns2=\"http://xml.apache.org/axis/\">api-01.broadmail.live</ns2:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>"
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 Jan 2016 14:35:50 GMT
 recorded_with: VCR 2.9.3
