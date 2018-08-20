@@ -27,16 +27,15 @@ module OptivoApi::WebServices
 
     # Returns a Hash with attribute => value of recipient
     def get(list_id:, recipient_id:, attribute_names: [])
-      if attribute_names.blank?
-        attribute_names = RecipientList.new.attribute_names(list_id)
-      end
+      attribute_names = RecipientList.new.attribute_names(list_id) if attribute_names.empty?
+
       rescue_recipient_not_in_list do
         result = get_attributes(
           list_id: list_id,
           recipient_id: recipient_id,
           attribute_names: attribute_names)
 
-        return {} if attribute_names.blank?
+        return {} if attribute_names.empty?
 
         attribute_names.zip(result).to_h
       end
@@ -126,7 +125,7 @@ module OptivoApi::WebServices
       yield
     rescue OptivoApi::RecipientIsAlreadyOnThisList # rubocop:disable Lint/HandleExceptions
     rescue StandardError => e
-      if e.message =~ /Recipient does not exist[s]? for call/i
+      if e.message.match?(/Recipient does not exist[s]? for call/i)
         raise OptivoApi::RecipientNotInList, e.message
       else
         raise

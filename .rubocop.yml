@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
 
 Documentation:
   Enabled: false
@@ -58,7 +58,7 @@ Layout/SpaceInsideHashLiteralBraces:
 Layout/SpaceBeforeFirstArg:
   Enabled: false
 
-Lint/EndAlignment:
+Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 
 Layout/AlignParameters:

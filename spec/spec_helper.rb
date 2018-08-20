@@ -6,13 +6,13 @@ SimpleCov.start do
   add_group "lib", "lib"
 end
 
-$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
 require "optivo_api"
 require "webmock/rspec"
 require "vcr"
 
-Dir[File.join(File.expand_path("../support/", __FILE__), "**/*.rb")].each { |f| require f }
+Dir[File.join(File.expand_path("support/", __dir__), "**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -42,7 +42,7 @@ OptivoApi.configure do |config|
 end
 
 VCR.configure do |c|
-  c.cassette_library_dir = File.expand_path("../fixtures/cassettes", __FILE__)
+  c.cassette_library_dir = File.expand_path("fixtures/cassettes", __dir__)
   c.hook_into :webmock
   c.default_cassette_options = {record: :once}
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:mandator_id] }

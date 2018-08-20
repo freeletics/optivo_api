@@ -5,7 +5,7 @@ module OptivoApi::WebServices
     def remove(recipient_id:)
       fetch_value(:remove, recipientId: recipient_id)
     rescue StandardError => e
-      if e.message =~ /No unsubscribe found/i
+      if e.message.match?(/No unsubscribe found/i)
         raise OptivoApi::NoUnsubscribeFound, e.message
       else
         raise
