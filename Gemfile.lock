@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    optivo_api (0.9.0)
+    optivo_api (0.10.0)
       savon (~> 2.11)
 
 GEM
@@ -21,7 +21,7 @@ GEM
     gyoku (1.3.1)
       builder (>= 2.1.2)
     hashdiff (0.3.7)
-    httpi (2.4.3)
+    httpi (2.4.4)
       rack
       socksify
     jaro_winkler (1.5.1)
@@ -99,4 +99,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.3
+   1.16.4

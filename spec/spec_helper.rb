@@ -1,4 +1,5 @@
 require "simplecov"
+require "cgi"
 
 SimpleCov.start do
   add_filter "spec/"
@@ -35,10 +36,11 @@ end
 WebMock.disable_net_connect!
 
 OptivoApi.configure do |config|
-  config.mandator_id = "666"
-  config.user = "my_user@test.com"
-  config.password = "secret"
+  config.mandator_id = ENV["OPTIVO_MANDATOR_ID"] || "666"
+  config.user = ENV["OPTIVO_MANDATOR_USER"] || "my_user@test.com"
+  config.password = ENV["OPTIVO_MANDATOR_PASSWORD"] || "secret"
   config.logger = Logger.new("/dev/null")
+  config.log_level = :debug
 end
 
 VCR.configure do |c|
@@ -47,5 +49,6 @@ VCR.configure do |c|
   c.default_cassette_options = {record: :once}
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:mandator_id] }
   c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:user] }
-  c.filter_sensitive_data("<FILTERED>") { OptivoApi.config[:password] }
+  # Fixes filtering of special chars
+  c.filter_sensitive_data("<FILTERED>") { CGI.escapeHTML(OptivoApi.config[:password]) }
 end

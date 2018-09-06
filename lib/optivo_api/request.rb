@@ -10,6 +10,8 @@ class OptivoApi::Request
   end
 
   def optivo_url
+    # TODO: change to new url
+    # "https://api.campaign.episerver.net/soap11/Rpc#{webservice_name}"
     "https://api.broadmail.de/soap11/Rpc#{webservice_name}?WSDL"
   end
 

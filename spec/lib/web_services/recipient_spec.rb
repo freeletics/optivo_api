@@ -172,7 +172,10 @@ RSpec.describe OptivoApi::WebServices::Recipient do
             recipient_id: 12_345,
             attribute_names: ["last_name"],
             attribute_values: ["tester123"])
-        end.to raise_error(OptivoApi::RecipientNotInList)
+        end.to raise_error do |error| # rubocop:disable Style/MultilineBlockChain
+          expect(error).to be_instance_of(OptivoApi::RecipientNotInList)
+          expect(error.recipient_ids).to eq(["12345"])
+        end
       end
     end
   end
@@ -190,7 +193,7 @@ RSpec.describe OptivoApi::WebServices::Recipient do
     end
 
     it "add an user if not exists" do
-      allow(recipient).to receive(:update).and_raise OptivoApi::RecipientNotInList
+      allow(recipient).to receive(:update).and_raise OptivoApi::RecipientNotInList.new("not exists", 666)
       expect(recipient).to receive(:add).with(
         list_id: "120199092218",
         recipient_id: 666,
@@ -213,6 +216,43 @@ RSpec.describe OptivoApi::WebServices::Recipient do
           email: "Unknown@test.com",
           attribute_names: ["last_name"],
           attribute_values: ["Unknown"])
+      end
+    end
+  end
+
+  describe "#bulk_update" do
+    it "updates provided attributes" do
+      VCR.use_cassette("bulk_update_success") do
+        recipient.bulk_update(
+          list_id: "120840736429",
+          recipient_ids: %w[1 100000001],
+          attributes: [{"gender" => "u", "locale" => "en"}, {"locale" => "de", "gender" => "m"}]
+        )
+      end
+    end
+
+    it "throws error if objects contain different keys" do
+      expect do
+        recipient.bulk_update(
+          list_id: "120840736429",
+          recipient_ids: %w[1 100000001],
+          attributes: [{"first_name" => "John", "gender" => "u", "locale" => "en"}, {"locale" => "de", "gender" => "m"}]
+        )
+      end.to raise_error(ArgumentError)
+    end
+
+    it "throws error if one of the recipients does not exist on list" do
+      expect do
+        VCR.use_cassette("bulk_update_failure") do
+          recipient.bulk_update(
+            list_id: "120840736429",
+            recipient_ids: %w[1 1000000012 1000000013],
+            attributes: [{"locale" => "en"}, {"locale" => "de"}, {"locale" => "pl"}]
+          )
+        end
+      end.to raise_error do |error| # rubocop:disable Style/MultilineBlockChain
+        expect(error).to be_instance_of(OptivoApi::RecipientNotInList)
+        expect(error.recipient_ids).to eq(%w[1000000012 1000000013])
       end
     end
   end

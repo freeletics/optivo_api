@@ -1,7 +1,6 @@
 module OptivoApi::WebServices
-  # https://companion.broadmail.de/display/DEMANUAL/RecipientWebservice
+  # https://world.episerver.com/documentation/developer-guides/campaign/SOAP-API/recipientwebservice/
   class Recipient < Base
-    # https://companion.broadmail.de/display/DEMANUAL/getAllFlat+-+RecipientWebservice
     def all(list_id, *attribute_names)
       response = fetch_value(:get_all_flat, recipientListId: list_id,
                                             attributeNames: [attribute_names])
@@ -9,10 +8,9 @@ module OptivoApi::WebServices
       result_to_hash convert_values(response[:get_all_flat_return]), attribute_names
     end
 
-    # https://companion.broadmail.de/display/DEMANUAL/remove+-+RecipientWebservice
     def remove(list_id:, recipient_id:)
       @recipient_id = recipient_id
-      rescue_recipient_not_in_list do
+      rescue_recipient_not_in_list(recipient_id) do
         fetch(:remove, recipientListId: list_id,
                        recipientId: recipient_id)
       end
@@ -29,7 +27,7 @@ module OptivoApi::WebServices
     def get(list_id:, recipient_id:, attribute_names: [])
       attribute_names = RecipientList.new.attribute_names(list_id) if attribute_names.empty?
 
-      rescue_recipient_not_in_list do
+      rescue_recipient_not_in_list(recipient_id) do
         result = get_attributes(
           list_id: list_id,
           recipient_id: recipient_id,
@@ -41,7 +39,6 @@ module OptivoApi::WebServices
       end
     end
 
-    # https://companion.broadmail.de/display/DEMANUAL/getAttributes+-+RecipientWebservice
     def get_attributes(list_id:, recipient_id:, attribute_names:)
       convert_values fetch_value(:get_attributes,
         recipient_list_id: list_id,
@@ -68,7 +65,6 @@ module OptivoApi::WebServices
                attribute_values: attribute_values)
     end
 
-    # https://companion.broadmail.de/display/DEMANUAL/add2+-+RecipientWebservice
     def add(list_id:, recipient_id:, email:, attribute_names:, attribute_values:)
       @recipient_id = recipient_id
       @email = email
@@ -80,10 +76,9 @@ module OptivoApi::WebServices
                                       attributeValues: [attribute_values])
     end
 
-    # https://companion.broadmail.de/display/DEMANUAL/setAttributes+-+RecipientWebservice
     def update(list_id:, recipient_id:, attribute_names:, attribute_values:)
       @recipient_id = recipient_id
-      rescue_recipient_not_in_list do
+      rescue_recipient_not_in_list(recipient_id) do
         parse_result fetch_value(:set_attributes,
           recipientListId: list_id,
           recipientId: recipient_id,
@@ -108,6 +103,42 @@ module OptivoApi::WebServices
         attribute_values: attribute_values)
     end
 
+    # Updates many recipients with given attributes
+    #
+    # attributes - array of hashes with name, value pair - keys must contain the same set for each object
+    #
+    # Examples
+    #
+    #   bulk_update(
+    #     list_id: 1,
+    #     recipient_ids: [1, 2],
+    #     attributes: [{"locale" => "en", "first_name" => "John"}, {"locale" => "de", "first_name" => "Jane"}]
+    #   )
+    def bulk_update(list_id:, recipient_ids:, attributes:)
+      attribute_names = attributes.first.keys.sort
+      if attributes.any? { |recipient| recipient.keys.sort != attribute_names }
+        raise ArgumentError, "Each object must contain the same set of keys"
+      end
+
+      attribute_values = attributes.flat_map do |recipient|
+        attribute_names.map { |name| recipient[name] }
+      end
+
+      fetch_value(
+        :set_attributes_in_batch_flat,
+        recipientListId: list_id,
+        recipientIds: [recipient_ids],
+        attributeNames: [attribute_names],
+        flatAttributeValues: [attribute_values]
+      )
+    rescue OptivoApi::UnknownError => error
+      if (match = error.message.match(/Recipients (.*) do not exist for call/))
+        raise OptivoApi::RecipientNotInList.new(error.message, match[1].split(","))
+      else
+        raise
+      end
+    end
+
     private
 
     attr_reader :recipient_id, :email
@@ -121,12 +152,12 @@ module OptivoApi::WebServices
     rescue OptivoApi::RecipientIsAlreadyOnThisList # rubocop:disable Lint/HandleExceptions
     end
 
-    def rescue_recipient_not_in_list
+    def rescue_recipient_not_in_list(recipient_id)
       yield
     rescue OptivoApi::RecipientIsAlreadyOnThisList # rubocop:disable Lint/HandleExceptions
     rescue StandardError => e
       if e.message.match?(/Recipient does not exist[s]? for call/i)
-        raise OptivoApi::RecipientNotInList, e.message
+        raise OptivoApi::RecipientNotInList.new(e.message, recipient_id.to_s)
       else
         raise
       end
