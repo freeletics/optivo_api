@@ -2,7 +2,8 @@ OptivoApi
 ===========
 [![Build Status](https://travis-ci.org/freeletics/optivo_api.png?branch=master)](https://travis-ci.org/freeletics/optivo_api)
 
-OptivoApi is a wrapper for the  [Optivo SOAP API](https://companion.broadmail.de/display/DEMANUAL/SOAP-API)
+OptivoApi is a wrapper for the [Optivo SOAP API](https://world.episerver.com/documentation/developer-guides/campaign/SOAP-API/)
+Now known as EpiServer.
 This is only a small set of the whole functionality of the api.
 
 ## Installation

@@ -91,11 +91,11 @@ class OptivoApi::Client
     end
   end
 
-  def savon_client(wdsl)
+  def savon_client(wsdl_url)
     log_level = OptivoApi.config[:log_level]
     Savon::Client.new do |savon|
       savon.ssl_verify_mode :none
-      savon.wsdl wdsl
+      savon.wsdl wsdl_url
       savon.raise_errors false
       savon.filters %i[mandatorId password]
       savon.convert_request_keys_to :lower_camelcase
