@@ -72,7 +72,7 @@ module OptivoApi::WebServices
                                       optinProcessId: 0,
                                       recipientId: recipient_id,
                                       address: email,
-                                      attributeNames:  [attribute_names],
+                                      attributeNames: [attribute_names],
                                       attributeValues: [attribute_values])
     end
 
@@ -82,7 +82,7 @@ module OptivoApi::WebServices
         parse_result fetch_value(:set_attributes,
           recipientListId: list_id,
           recipientId: recipient_id,
-          attributeNames:  [attribute_names],
+          attributeNames: [attribute_names],
           attributeValues: [attribute_values])
       end
     end
