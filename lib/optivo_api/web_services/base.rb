@@ -9,7 +9,8 @@ module OptivoApi::WebServices
         webservice: webservice,
         call_name: call_name,
         attributes: attributes,
-        config:     @config)
+        config: @config
+      )
     end
 
     def fetch_value(call_name, attributes = {})

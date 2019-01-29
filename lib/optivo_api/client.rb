@@ -67,6 +67,7 @@ class OptivoApi::Client
         return yield
       rescue OptivoApi::InvalidSession
         raise if i > 2
+
         sleep(1)
         OptivoApi.log "refetch_session_id for #{i + 1}. time"
         fetch_session_id force: true
