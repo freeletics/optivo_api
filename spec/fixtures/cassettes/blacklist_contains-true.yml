@@ -1,0 +1,2618 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.broadmail.de/soap11/RpcSession?WSDL
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 24 Apr 2019 13:20:12 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=0
+      P3p:
+      - policyref="http://www.srv2.de/w3c/p3p.xml",CP="NOI DSP COR CURa ADMa DEVa
+        OUR IND UNI COM NAV"
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/xml;charset=utf-8
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <wsdl:definitions targetNamespace="urn:api.broadmail.de/soap11/RpcSession" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:api.broadmail.de/soap11/RpcSession" xmlns:intf="urn:api.broadmail.de/soap11/RpcSession" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://lang.java" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+        <!--WSDL created by Apache Axis version: 1.4
+        Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+          <wsdl:types>
+
+            <schema targetNamespace="urn:api.broadmail.de/soap11/RpcSession" xmlns="http://www.w3.org/2001/XMLSchema">
+
+              <import namespace="http://lang.java"/>
+
+              <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+
+              <complexType name="WebserviceException">
+
+                <sequence>
+
+                  <element name="cause" nillable="true" type="xsd:anyType"/>
+
+                  <element name="message" nillable="true" type="xsd:string"/>
+
+                </sequence>
+
+              </complexType>
+
+            </schema>
+
+          </wsdl:types>
+
+
+            <wsdl:message name="setMediaTypeResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="setLocaleResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="WebserviceException">
+
+
+                <wsdl:part name="fault" type="impl:WebserviceException">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getVersionResponse">
+
+
+                <wsdl:part name="getVersionReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="loginRequest">
+
+
+                <wsdl:part name="in0" type="xsd:long">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in2" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="logoutRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getMediaTypeRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="loginResponse">
+
+
+                <wsdl:part name="loginReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="logoutResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getVersionRequest">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="setLocaleRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getMediaTypeResponse">
+
+
+                <wsdl:part name="getMediaTypeReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="setMediaTypeRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getLocaleRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getLocaleResponse">
+
+
+                <wsdl:part name="getLocaleReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:portType name="SessionWebservice">
+
+
+                <wsdl:operation name="setMediaType" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:setMediaTypeRequest" name="setMediaTypeRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:setMediaTypeResponse" name="setMediaTypeResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getMediaType" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getMediaTypeRequest" name="getMediaTypeRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getMediaTypeResponse" name="getMediaTypeResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="setLocale" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:setLocaleRequest" name="setLocaleRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:setLocaleResponse" name="setLocaleResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getLocale" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getLocaleRequest" name="getLocaleRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getLocaleResponse" name="getLocaleResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="login" parameterOrder="in0 in1 in2">
+
+
+                    <wsdl:input message="impl:loginRequest" name="loginRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:loginResponse" name="loginResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="logout" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:logoutRequest" name="logoutRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:logoutResponse" name="logoutResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getVersion">
+
+
+                    <wsdl:input message="impl:getVersionRequest" name="getVersionRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getVersionResponse" name="getVersionResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+            </wsdl:portType>
+
+
+            <wsdl:binding name="RpcSessionSoapBinding" type="impl:SessionWebservice">
+
+
+                <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+
+                <wsdl:operation name="setMediaType">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="setMediaTypeRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="setMediaTypeResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getMediaType">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getMediaTypeRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getMediaTypeResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="setLocale">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="setLocaleRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="setLocaleResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getLocale">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getLocaleRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getLocaleResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="login">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="loginRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="loginResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="logout">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="logoutRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="logoutResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getVersion">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getVersionRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getVersionResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcSession" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+            </wsdl:binding>
+
+
+            <wsdl:service name="SessionWebserviceService">
+
+
+                <wsdl:port binding="impl:RpcSessionSoapBinding" name="RpcSession">
+
+
+                    <wsdlsoap:address location="https://api.broadmail.de/soap11/RpcSession"/>
+
+
+                </wsdl:port>
+
+
+            </wsdl:service>
+
+
+        </wsdl:definitions>
+    http_version: 
+  recorded_at: Wed, 24 Apr 2019 13:20:13 GMT
+- request:
+    method: post
+    uri: https://api.broadmail.de/soap11/RpcSession
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:impl="urn:api.broadmail.de/soap11/RpcSession"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><impl:login><mandatorId><FILTERED></mandatorId><user><FILTERED></user><password><FILTERED></password></impl:login></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"login"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '447'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 24 Apr 2019 13:20:13 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=0
+      P3p:
+      - policyref="http://www.srv2.de/w3c/p3p.xml",CP="NOI DSP COR CURa ADMa DEVa
+        OUR IND UNI COM NAV"
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/xml;charset=utf-8
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:loginResponse
+        soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcSession"><loginReturn
+        xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">8bea48043fe71194</loginReturn></ns1:loginResponse></soapenv:Body></soapenv:Envelope>
+    http_version: 
+  recorded_at: Wed, 24 Apr 2019 13:20:13 GMT
+- request:
+    method: get
+    uri: https://api.broadmail.de/soap11/RpcBlacklist?WSDL
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 24 Apr 2019 13:20:13 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=0
+      P3p:
+      - policyref="http://www.srv2.de/w3c/p3p.xml",CP="NOI DSP COR CURa ADMa DEVa
+        OUR IND UNI COM NAV"
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/xml;charset=utf-8
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <wsdl:definitions targetNamespace="urn:api.broadmail.de/soap11/RpcBlacklist" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:api.broadmail.de/soap11/RpcBlacklist" xmlns:intf="urn:api.broadmail.de/soap11/RpcBlacklist" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://lang.java" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+        <!--WSDL created by Apache Axis version: 1.4
+        Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+          <wsdl:types>
+
+            <schema targetNamespace="urn:api.broadmail.de/soap11/RpcBlacklist" xmlns="http://www.w3.org/2001/XMLSchema">
+
+              <import namespace="http://lang.java"/>
+
+              <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+
+              <complexType name="ArrayOfArrayOf_xsd_string">
+
+                <complexContent>
+
+                  <restriction base="soapenc:Array">
+
+                    <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[][]"/>
+
+                  </restriction>
+
+                </complexContent>
+
+              </complexType>
+
+              <complexType name="WebserviceException">
+
+                <sequence>
+
+                  <element name="cause" nillable="true" type="xsd:anyType"/>
+
+                  <element name="message" nillable="true" type="xsd:string"/>
+
+                </sequence>
+
+              </complexType>
+
+              <complexType name="ArrayOf_xsd_string">
+
+                <complexContent>
+
+                  <restriction base="soapenc:Array">
+
+                    <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+
+                  </restriction>
+
+                </complexContent>
+
+              </complexType>
+
+              <complexType name="ArrayOf_xsd_boolean">
+
+                <complexContent>
+
+                  <restriction base="soapenc:Array">
+
+                    <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:boolean[]"/>
+
+                  </restriction>
+
+                </complexContent>
+
+              </complexType>
+
+            </schema>
+
+          </wsdl:types>
+
+
+            <wsdl:message name="getDataSetRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getAllAdvancedRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:int">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in2" type="xsd:int">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getCountRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="addRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in2" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="containsAllRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getFirstMatchingEntryResponse">
+
+
+                <wsdl:part name="getFirstMatchingEntryReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getColumnNamesRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="addResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getDataSetFlatResponse">
+
+
+                <wsdl:part name="getDataSetFlatReturn" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="addAllResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getColumnNamesResponse">
+
+
+                <wsdl:part name="getColumnNamesReturn" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getCreatedResponse">
+
+
+                <wsdl:part name="getCreatedReturn" type="xsd:dateTime">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="removeRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getFirstMatchingEntryRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getVersionRequest">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="removeAllRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getReasonResponse">
+
+
+                <wsdl:part name="getReasonReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="containsResponse">
+
+
+                <wsdl:part name="containsReturn" type="xsd:boolean">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="areBlacklistedResponse">
+
+
+                <wsdl:part name="areBlacklistedReturn" type="impl:ArrayOf_xsd_boolean">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="isBlacklistedResponse">
+
+
+                <wsdl:part name="isBlacklistedReturn" type="xsd:boolean">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="WebserviceException">
+
+
+                <wsdl:part name="fault" type="impl:WebserviceException">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="removeResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getVersionResponse">
+
+
+                <wsdl:part name="getVersionReturn" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getCreatedRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getAllAdvancedFlatResponse">
+
+
+                <wsdl:part name="getAllAdvancedFlatReturn" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getAllEntriesRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="containsAllResponse">
+
+
+                <wsdl:part name="containsAllReturn" type="impl:ArrayOf_xsd_boolean">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getCountResponse">
+
+
+                <wsdl:part name="getCountReturn" type="xsd:int">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getDataSetResponse">
+
+
+                <wsdl:part name="getDataSetReturn" type="impl:ArrayOfArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="addAllRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in2" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getDataSetFlatRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="isBlacklistedRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="areBlacklistedRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getReasonRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="containsRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="removeAllResponse">
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getAllEntriesResponse">
+
+
+                <wsdl:part name="getAllEntriesReturn" type="impl:ArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getAllAdvancedResponse">
+
+
+                <wsdl:part name="getAllAdvancedReturn" type="impl:ArrayOfArrayOf_xsd_string">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:message name="getAllAdvancedFlatRequest">
+
+
+                <wsdl:part name="in0" type="xsd:string">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in1" type="xsd:int">
+
+
+                </wsdl:part>
+
+
+                <wsdl:part name="in2" type="xsd:int">
+
+
+                </wsdl:part>
+
+
+            </wsdl:message>
+
+
+            <wsdl:portType name="BlacklistWebservice">
+
+
+                <wsdl:operation name="getDataSet" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getDataSetRequest" name="getDataSetRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getDataSetResponse" name="getDataSetResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getColumnNames" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getColumnNamesRequest" name="getColumnNamesRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getColumnNamesResponse" name="getColumnNamesResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getDataSetFlat" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getDataSetFlatRequest" name="getDataSetFlatRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getDataSetFlatResponse" name="getDataSetFlatResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="areBlacklisted" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:areBlacklistedRequest" name="areBlacklistedRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:areBlacklistedResponse" name="areBlacklistedResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getAllEntries" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getAllEntriesRequest" name="getAllEntriesRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getAllEntriesResponse" name="getAllEntriesResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getAllAdvanced" parameterOrder="in0 in1 in2">
+
+
+                    <wsdl:input message="impl:getAllAdvancedRequest" name="getAllAdvancedRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getAllAdvancedResponse" name="getAllAdvancedResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getAllAdvancedFlat" parameterOrder="in0 in1 in2">
+
+
+                    <wsdl:input message="impl:getAllAdvancedFlatRequest" name="getAllAdvancedFlatRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getAllAdvancedFlatResponse" name="getAllAdvancedFlatResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getFirstMatchingEntry" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:getFirstMatchingEntryRequest" name="getFirstMatchingEntryRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getFirstMatchingEntryResponse" name="getFirstMatchingEntryResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getCreated" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:getCreatedRequest" name="getCreatedRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getCreatedResponse" name="getCreatedResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getCount" parameterOrder="in0">
+
+
+                    <wsdl:input message="impl:getCountRequest" name="getCountRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getCountResponse" name="getCountResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="isBlacklisted" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:isBlacklistedRequest" name="isBlacklistedRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:isBlacklistedResponse" name="isBlacklistedResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getReason" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:getReasonRequest" name="getReasonRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getReasonResponse" name="getReasonResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="add" parameterOrder="in0 in1 in2">
+
+
+                    <wsdl:input message="impl:addRequest" name="addRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:addResponse" name="addResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="remove" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:removeRequest" name="removeRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:removeResponse" name="removeResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="contains" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:containsRequest" name="containsRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:containsResponse" name="containsResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="addAll" parameterOrder="in0 in1 in2">
+
+
+                    <wsdl:input message="impl:addAllRequest" name="addAllRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:addAllResponse" name="addAllResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="containsAll" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:containsAllRequest" name="containsAllRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:containsAllResponse" name="containsAllResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="removeAll" parameterOrder="in0 in1">
+
+
+                    <wsdl:input message="impl:removeAllRequest" name="removeAllRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:removeAllResponse" name="removeAllResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getVersion">
+
+
+                    <wsdl:input message="impl:getVersionRequest" name="getVersionRequest">
+
+
+                  </wsdl:input>
+
+
+                    <wsdl:output message="impl:getVersionResponse" name="getVersionResponse">
+
+
+                  </wsdl:output>
+
+
+                    <wsdl:fault message="impl:WebserviceException" name="WebserviceException">
+
+
+                  </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+            </wsdl:portType>
+
+
+            <wsdl:binding name="RpcBlacklistSoapBinding" type="impl:BlacklistWebservice">
+
+
+                <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+
+                <wsdl:operation name="getDataSet">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getDataSetRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getDataSetResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getColumnNames">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getColumnNamesRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getColumnNamesResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getDataSetFlat">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getDataSetFlatRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getDataSetFlatResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="areBlacklisted">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="areBlacklistedRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="areBlacklistedResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getAllEntries">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getAllEntriesRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getAllEntriesResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getAllAdvanced">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getAllAdvancedRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getAllAdvancedResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getAllAdvancedFlat">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getAllAdvancedFlatRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getAllAdvancedFlatResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getFirstMatchingEntry">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getFirstMatchingEntryRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getFirstMatchingEntryResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getCreated">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getCreatedRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getCreatedResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getCount">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getCountRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getCountResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="isBlacklisted">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="isBlacklistedRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="isBlacklistedResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getReason">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getReasonRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getReasonResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="add">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="addRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="addResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="remove">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="removeRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="removeResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="contains">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="containsRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="containsResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="addAll">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="addAllRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="addAllResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="containsAll">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="containsAllRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="containsAllResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="removeAll">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="removeAllRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="removeAllResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+                <wsdl:operation name="getVersion">
+
+
+                    <wsdlsoap:operation soapAction=""/>
+
+
+                    <wsdl:input name="getVersionRequest">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:input>
+
+
+                    <wsdl:output name="getVersionResponse">
+
+
+                        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:output>
+
+
+                    <wsdl:fault name="WebserviceException">
+
+
+                        <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="WebserviceException" namespace="urn:api.broadmail.de/soap11/RpcBlacklist" use="encoded"/>
+
+
+                    </wsdl:fault>
+
+
+                </wsdl:operation>
+
+
+            </wsdl:binding>
+
+
+            <wsdl:service name="BlacklistWebserviceService">
+
+
+                <wsdl:port binding="impl:RpcBlacklistSoapBinding" name="RpcBlacklist">
+
+
+                    <wsdlsoap:address location="https://api.broadmail.de/soap11/RpcBlacklist"/>
+
+
+                </wsdl:port>
+
+
+            </wsdl:service>
+
+
+        </wsdl:definitions>
+    http_version: 
+  recorded_at: Wed, 24 Apr 2019 13:20:13 GMT
+- request:
+    method: post
+    uri: https://api.broadmail.de/soap11/RpcBlacklist
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:impl="urn:api.broadmail.de/soap11/RpcBlacklist"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><impl:contains><entry>wojtek-spam@test.com</entry><sessionId>8bea48043fe71194</sessionId></impl:contains></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"contains"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '400'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 24 Apr 2019 13:20:13 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=0
+      P3p:
+      - policyref="http://www.srv2.de/w3c/p3p.xml",CP="NOI DSP COR CURa ADMa DEVa
+        OUR IND UNI COM NAV"
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/xml;charset=utf-8
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:containsResponse
+        soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:api.broadmail.de/soap11/RpcBlacklist"><containsReturn
+        href="#id0"/></ns1:containsResponse><multiRef id="id0" soapenc:root="0" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        xsi:type="xsd:boolean" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">true</multiRef></soapenv:Body></soapenv:Envelope>
+    http_version: 
+  recorded_at: Wed, 24 Apr 2019 13:20:13 GMT
+recorded_with: VCR 4.0.0

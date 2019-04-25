@@ -131,9 +131,9 @@ module OptivoApi::WebServices
         attributeNames: [attribute_names],
         flatAttributeValues: [attribute_values]
       )
-    rescue OptivoApi::UnknownError => error
-      if (match = error.message.match(/Recipients (.*) do not exist for call/))
-        raise OptivoApi::RecipientNotInList.new(error.message, match[1].split(","))
+    rescue OptivoApi::UnknownError => e
+      if (match = e.message.match(/Recipients (.*) do not exist for call/))
+        raise OptivoApi::RecipientNotInList.new(e.message, match[1].split(","))
       else
         raise
       end
